@@ -7,12 +7,14 @@ import BoutonSignIn from '../components/boutonSignIn.tsx';
 function Home() {
 
     return(
-        <div className='d-flex flex-rows justify-content-center mt-50'>
+        <div className='d-flex justify-content-center align-items-center p-5 '>
+            <div className='d-flex flex-rows justify-content-center align-items-center p-5 '>
 
-                <BoutonLogIn/>
-                <Carousel/>
-                <BoutonSignIn/>
-       
+                    <BoutonLogIn/>
+                    <Carousel/>
+                    <BoutonSignIn/>
+        
+            </div>
         </div>
     )
 }
