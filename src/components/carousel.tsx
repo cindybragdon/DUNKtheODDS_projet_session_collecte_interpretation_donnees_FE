@@ -31,7 +31,7 @@ const Carousel: React.FC = () => {
             <div className="filledbar"></div>
           </div>
           <div className="circle">
-          <h3 className="title">{image.name}</h3>
+          <h3 className="title textStyle">{image.name}</h3>
 
           </div>
         </div>
