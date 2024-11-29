@@ -1,13 +1,148 @@
 body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  background-image: url('../../caroussel/public/images/backgroundHome.jpg'); 
+  background-size: cover; 
+  background-repeat: no-repeat; 
+  background-position: center center; 
+  font-family: 'Open Sans', sans-serif;
+  margin: 0; 
+  height: 100vh; 
+  width: 100vw; 
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+
+.carousel-image {
+  width: 100%;
+  height: 150px; 
+  object-fit: cover;
+  border-radius: 10px 10px 0 0;
+}
+
+.container {
+  height: 450px; 
+  width: 900px; 
+  top: 60px;
+  left: calc(50% - 450px); 
+  display: flex;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  height: 420px; 
+  width: 300px; 
+  background-color: #17141d;
+  border-radius: 10px;
+  box-shadow: -1rem 0 3rem #000;
+  transition: 0.4s ease-out;
+  position: relative;
+  left: 0px;
+}
+
+.card:not(:first-child) {
+  margin-left: -75px; 
+}
+
+.card:hover {
+  transform: translateY(-20px);
+  transition: 0.4s ease-out;
+}
+
+.card:hover ~ .card {
+  position: relative;
+  left: 75px; 
+  transition: 0.4s ease-out;
+}
+
+.title {
+  color: white;
+  font-weight: 300;
+  position: absolute;
+  left: 15px; 
+  top: 15px;
+  font-size: 1.2rem; 
+}
+
+.bar {
+  position: absolute;
+  bottom: 15px; 
+  left: 15px;
+  height: 8px; 
+  width: calc(100% - 30px); 
+}
+
+.emptybar {
+  background-color: #2e3033;
+  width: 100%;
+  height: 100%;
+}
+
+.filledbar {
+  position: absolute;
+  top: 0px;
+  z-index: 3;
+  width: 0%;
+  height: 100%;
+  background: rgb(0,154,217);
+  background: linear-gradient(90deg, rgba(0,154,217,1) 0%, rgba(217,147,0,1) 65%, rgba(255,186,0,1) 100%);
+  transition: 0.6s ease-out;
+}
+
+.card:hover .filledbar {
+  width: 100%; 
+  transition: 0.4s ease-out;
+}
+
+.circle {
+  position: absolute;
+  top: 200px; 
+  left: calc(50% - 45px); 
+  width: 90px;
+  height: 90px; 
+}
+
+.stroke {
+  stroke: white;
+  stroke-dasharray: 270; 
+  stroke-dashoffset: 270; 
+  transition: 0.6s ease-out;
+}
+
+svg {
+  fill: #17141d;
+  stroke-width: 2px;
+}
+
+.card:hover .stroke {
+  stroke-dashoffset: 75; 
+  transition: 0.6s ease-out;
+}
+
+.button-container {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  margin-top: 30px;
+}
+
+.custom-button {
+  background: linear-gradient(90deg, rgba(0,154,217,1) 0%, rgba(217,147,0,1) 65%, rgba(255,186,0,1) 100%);
+  border: none;
+  color: white;
+  font-size: 1.2rem;
+  font-weight: bold;
+  padding: 12px 30px;
+  border-radius: 5px;
+  cursor: pointer;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.custom-button:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.5);
+}
+
+.custom-button:active {
+  transform: translateY(0);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
 }
