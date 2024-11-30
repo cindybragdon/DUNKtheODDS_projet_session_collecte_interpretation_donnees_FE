@@ -52,7 +52,7 @@ const Picks = ({ data }: Props) => {
             as={ButtonGroup}
             variant="secondary"
             title={`Team B: ${teamB || "Select"}`}
-            onSelect={(e: string | null) => setTeamA(e || '')}
+            onSelect={(e: string | null) => setTeamB(e || '')}
             className="custom-dropdown"
           >
             {nbaTeams.map((team, index) => (
@@ -66,7 +66,7 @@ const Picks = ({ data }: Props) => {
             as={ButtonGroup}
             variant="secondary"
             title={`Bet Type: ${betType || "Select"}`}
-            onSelect={(e: string | null) => setTeamA(e || '')}
+            onSelect={(e: string | null) => setBetType(e || '')}
             className="custom-dropdown"
           >
             {betTypes.map((type, index) => (
