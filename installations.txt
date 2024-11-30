@@ -1,1 +1,12 @@
 # Bootstrap
+npm i bootstrap
+
+#Router-Dom
+npm i @types/react-router-dom
+
+#Chart.js
+npm install chart.js
+Et mettre ceci dans le HTML 
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+

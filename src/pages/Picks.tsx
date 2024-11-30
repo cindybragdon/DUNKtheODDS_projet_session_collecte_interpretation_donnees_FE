@@ -1,123 +1,249 @@
-import React, { useState } from 'react';
-import { Table, Dropdown, DropdownButton, ButtonGroup } from 'react-bootstrap';
+import React, { useEffect, useState } from "react";
+import Chart from "chart.js/auto";
 
-interface TableRow {
-  team: string;
-  odds: string;
-  points: number;
-  spread: number;
-}
+const Picks = () => {
+  const [selectedTeam1, setSelectedTeam1] = useState<string>("");
+  const [selectedTeam2, setSelectedTeam2] = useState<string>("");
+  const [selectedBetType, setSelectedBetType] = useState<string>("points");
 
-interface Props {
-  data: TableRow[];
-}
+  const teams = [
+    "Atlanta Hawks", "Boston Celtics", "Charlotte Hornets", 
+    "Chicago Bulls", "Cleveland Cavaliers", "Dallas Mavericks", "Denver Nuggets", 
+    "Detroit Pistons", "Houston Rockets", "Indiana Pacers", 
+    "Los Angeles Clippers", "Los Angeles Lakers", "Memphis Grizzlies", "Miami Heat", 
+    "Milwaukee Bucks", "Minnesota Timberwolves", "New Orleans Pelicans", "New York Knicks", 
+    "Oklahoma City Thunder", "Orlando Magic", "Philadelphia 76ers", "Phoenix Suns", 
+    "Portland Trail Blazers", "Sacramento Kings", "San Antonio Spurs", "Toronto Raptors", 
+    "Utah Jazz", "Washington Wizards"
+  ];
 
-const nbaTeams = [
-  "Lakers", "Warriors", "Bulls", "Celtics", "Nets", "Heat", "Knicks", "76ers",
-  "Suns", "Raptors", "Hawks", "Clippers", "Mavericks", "Bucks", "Timberwolves",
-  "Pelicans", "Magic", "Hornets", "Spurs", "Kings", "Jazz", "Thunder", "Pistons",
-  "Rockets", "Pacers", "Wizards", "Cavaliers", "Grizzlies", "Nuggets",
-  "Trail Blazers"
-];
+  const mockData = [
+    { team: "Lakers", odds: "+120", points: 102, spread: -4.5 },
+    { team: "Celtics", odds: "+110", points: 112, spread: -3.5 },
+  ];
 
-const betTypes = [
-  "Moneyline", "Spread", "Over/Under", "OT Prolongation", "Prop Bets"
-];
+  useEffect(() => {
+    const ctxPoints = document.getElementById("pointsChart") as HTMLCanvasElement;
+    const ctxSpread = document.getElementById("spreadChart") as HTMLCanvasElement;
+    const ctxMoneyline = document.getElementById("moneylineChart") as HTMLCanvasElement;
 
-const Picks = ({ data }: Props) => {
-  const [teamA, setTeamA] = useState<string>('');
-  const [teamB, setTeamB] = useState<string>('');
-  const [betType, setBetType] = useState<string>('');
+    Chart.getChart(ctxPoints)?.destroy();
+    Chart.getChart(ctxSpread)?.destroy();
+    Chart.getChart(ctxMoneyline)?.destroy();
+
+    const teamNames = mockData.map((item) => item.team);
+    const teamPoints = mockData.map((item) => item.points);
+    const teamSpreads = mockData.map((item) => item.spread);
+    const teamOdds = mockData.map((item) => parseInt(item.odds.replace("+", "")) || 0);
+
+    new Chart(ctxPoints, {
+      type: "bar",
+      data: {
+        labels: teamNames,
+        datasets: [
+          {
+            label: "Points",
+            data: teamPoints,
+            backgroundColor: ["rgba(75, 192, 192, 0.2)", "rgba(255, 99, 132, 0.2)"],
+            borderColor: ["rgba(75, 192, 192, 1)", "rgba(255, 99, 132, 1)"],
+            borderWidth: 1,
+          },
+        ],
+      },
+      options: {
+        responsive: true,
+        plugins: {
+          legend: {
+            labels: {
+              color: 'white',
+            }
+          }
+        },
+        scales: {
+          y: {
+            beginAtZero: true,
+            ticks: {
+              color: 'white',
+            }
+          },
+          x: {
+            ticks: {
+              color: 'white',
+            }
+          }
+        },
+      },
+    });
+
+    new Chart(ctxSpread, {
+      type: "line",
+      data: {
+        labels: teamNames,
+        datasets: [
+          {
+            label: "Spread",
+            data: teamSpreads,
+            borderColor: "rgba(153, 102, 255, 1)",
+            backgroundColor: "rgba(153, 102, 255, 0.2)",
+            fill: true,
+            tension: 0.4,
+          },
+        ],
+      },
+      options: {
+        responsive: true,
+        plugins: {
+          legend: {
+            labels: {
+              color: 'white',
+            }
+          }
+        },
+        scales: {
+          y: {
+            beginAtZero: true,
+            ticks: {
+              color: 'white',
+            }
+          },
+          x: {
+            ticks: {
+              color: 'white',
+            }
+          }
+        },
+      },
+    });
+
+    new Chart(ctxMoneyline, {
+      type: "doughnut",
+      data: {
+        labels: teamNames,
+        datasets: [
+          {
+            label: "Odds (Moneyline)",
+            data: teamOdds,
+            backgroundColor: [
+              "rgba(255, 99, 132, 0.6)",
+              "rgba(54, 162, 235, 0.6)",
+              "rgba(255, 206, 86, 0.6)",
+              "rgba(75, 192, 192, 0.6)",
+              "rgba(153, 102, 255, 0.6)",
+            ],
+            borderColor: [
+              "rgba(255, 99, 132, 1)",
+              "rgba(54, 162, 235, 1)",
+              "rgba(255, 206, 86, 1)",
+              "rgba(75, 192, 192, 1)",
+              "rgba(153, 102, 255, 1)",
+            ],
+            borderWidth: 1,
+          },
+        ],
+      },
+      options: {
+        responsive: true,
+        plugins: {
+          legend: {
+            labels: {
+              color: 'white',
+            }
+          }
+        },
+      },
+    });
+
+    return () => {
+      Chart.getChart(ctxPoints)?.destroy();
+      Chart.getChart(ctxSpread)?.destroy();
+      Chart.getChart(ctxMoneyline)?.destroy();
+    };
+  }, []);
 
   return (
-    <div className="container-fluid min-vh-100 d-flex flex-column">
+    <div className="container-fluid p-4" style={{ overflowX: "hidden" }}>
+      <h1 className="text-center text-white mb-4">Statistiques des Picks</h1>
 
-      <div className="d-flex flex-column align-items-center gap-4 mt-5">
-        <div className="d-flex justify-content-center gap-4">
-          <DropdownButton
-            as={ButtonGroup}
-            variant="secondary"
-            title={`Team A: ${teamA || "Select"}`}
-            onSelect={(e: string | null) => setTeamA(e || '')}
-            className="custom-dropdown"
+      <div className="mb-3 d-flex justify-content-between flex-wrap" style={{ overflowX: "hidden" }}>
+        <div className="me-3" style={{ width: "30%", maxWidth: "300px" }}>
+          <label className="form-label text-white">Sélectionnez l'équipe 1</label>
+          <select
+            className="form-select"
+            value={selectedTeam1}
+            onChange={(e) => setSelectedTeam1(e.target.value)}
           >
-            {nbaTeams.map((team, index) => (
-              <Dropdown.Item key={index} eventKey={team}>
+            <option value="">Choisir une équipe</option>
+            {teams.map((team, index) => (
+              <option key={index} value={team}>
                 {team}
-              </Dropdown.Item>
+              </option>
             ))}
-          </DropdownButton>
-
-          <DropdownButton
-            as={ButtonGroup}
-            variant="secondary"
-            title={`Team B: ${teamB || "Select"}`}
-            onSelect={(e: string | null) => setTeamB(e || '')}
-            className="custom-dropdown"
-          >
-            {nbaTeams.map((team, index) => (
-              <Dropdown.Item key={index} eventKey={team}>
-                {team}
-              </Dropdown.Item>
-            ))}
-          </DropdownButton>
-
-          <DropdownButton
-            as={ButtonGroup}
-            variant="secondary"
-            title={`Bet Type: ${betType || "Select"}`}
-            onSelect={(e: string | null) => setBetType(e || '')}
-            className="custom-dropdown"
-          >
-            {betTypes.map((type, index) => (
-              <Dropdown.Item key={index} eventKey={type}>
-                {type}
-              </Dropdown.Item>
-            ))}
-          </DropdownButton>
+          </select>
         </div>
 
-        <div
-          className="output-box p-3 text-center border rounded"
-          style={{
-            width: '80%',
-            backgroundColor: '#f8f9fa',
-            marginTop: '1rem',
-            fontSize: '1.2rem'
-          }}
-        >
-          {teamA && teamB && betType ? (
-            <>
-              <strong>Odds:</strong> {teamA} vs {teamB} - {betType}
-            </>
-          ) : (
-            "Please select both teams and a bet type."
-          )}
+        <div className="me-3" style={{ width: "30%", maxWidth: "300px" }}>
+          <label className="form-label text-white">Sélectionnez l'équipe 2</label>
+          <select
+            className="form-select"
+            value={selectedTeam2}
+            onChange={(e) => setSelectedTeam2(e.target.value)}
+          >
+            <option value="">Choisir une équipe</option>
+            {teams.map((team, index) => (
+              <option key={index} value={team}>
+                {team}
+              </option>
+            ))}
+          </select>
+        </div>
+
+        <div style={{ width: "30%", maxWidth: "300px" }}>
+          <label className="form-label text-white">Sélectionnez le type de mise</label>
+          <select
+            className="form-select"
+            value={selectedBetType}
+            onChange={(e) => setSelectedBetType(e.target.value)}
+          >
+            <option value="points">Points</option>
+            <option value="spread">Spread</option>
+            <option value="moneyline">Moneyline</option>
+          </select>
         </div>
       </div>
 
-      <div className="table-responsive mt-4 mb-4" style={{ width: '80%', margin: '0 auto' }}>
-        <Table striped bordered hover className="text-center">
-          <thead>
-            <tr>
-              <th>Team</th>
-              <th>Odds</th>
-              <th>Points</th>
-              <th>Spread</th>
+      <div className="chart-container mt-4 d-flex flex-wrap justify-content-between" style={{ overflowX: "hidden" }}>
+        <div style={{ width: "30%", minWidth: "200px", maxWidth: "400px", height: "auto" }}>
+          <canvas id="pointsChart"></canvas>
+        </div>
+        <div style={{ width: "30%", minWidth: "200px", maxWidth: "400px", height: "auto" }}>
+          <canvas id="spreadChart"></canvas>
+        </div>
+        <div style={{ width: "30%", minWidth: "200px", maxWidth: "400px", height: "auto" }}>
+          <canvas id="moneylineChart"></canvas>
+        </div>
+      </div>
+
+      <h1 className="text-center text-white mb-4">Matchs d'aujourd'hui</h1>
+      <table className="table table-bordered mt-3">
+        <thead>
+          <tr>
+            <th>Team</th>
+            <th>Moneyline</th>
+            <th>Points</th>
+            <th>Spread</th>
+          </tr>
+        </thead>
+        <tbody>
+          {mockData.map((item, index) => (
+            <tr key={index} style={{ backgroundColor: index % 2 === 0 ? "#f8f9fa" : "#e9ecef" }}>
+              <td>{item.team}</td>
+              <td>{item.odds}</td>
+              <td>{item.points}</td>
+              <td>{item.spread}</td>
             </tr>
-          </thead>
-          <tbody>
-            {data.map((row, index) => (
-              <tr key={index}>
-                <td>{row.team}</td>
-                <td>{row.odds}</td>
-                <td>{row.points}</td>
-                <td>{row.spread}</td>
-              </tr>
-            ))}
-          </tbody>
-        </Table>
-      </div>
+          ))}
+        </tbody>
+      </table>
     </div>
   );
 };
