@@ -1,0 +1,5 @@
+.custom-dropdown .dropdown-menu {
+    max-height: 200px; /* Limite la hauteur de la liste déroulante */
+    overflow-y: auto;  /* Active le défilement vertical */
+    scrollbar-width: thin; /* (Optionnel) Ajuste la largeur de la barre de défilement */
+  }
