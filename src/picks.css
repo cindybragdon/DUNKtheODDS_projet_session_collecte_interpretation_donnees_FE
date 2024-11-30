@@ -3,3 +3,23 @@
     overflow-y: auto;  /* Active le défilement vertical */
     scrollbar-width: thin; /* (Optionnel) Ajuste la largeur de la barre de défilement */
   }
+
+  /* Applique un fond spécifique à la page Picks */
+.picks-page {
+  background-color: #17141d; /* Ton fond souhaité */
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center;
+  min-height: 100vh; /* Assure-toi que le fond couvre tout le viewport verticalement */
+  padding-bottom: 20px; /* Ajoute un peu de marge pour éviter que le fond ne soit trop coupé */
+}
+
+body {
+  margin: 0;
+  height: 100%;
+  width: 100%;
+}
+
+.container-fluid {
+  min-height: 100%; /* Cela permet à l'élément .container de prendre toute la hauteur de la page */
+}
