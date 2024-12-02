@@ -1,6 +1,6 @@
 import React from "react";
 
-const TableauMatchAjd = (props) => {
+const TableauMatchAjd = (props : any) => {
 
     return(
         <div>
@@ -15,7 +15,7 @@ const TableauMatchAjd = (props) => {
                 </tr>
                 </thead>
                 <tbody>
-                {props.dataMatch.map((item, index) => (
+                {props.dataMatch.map((item : any , index : any) => (
                     <tr key={index} style={{ backgroundColor: index % 2 === 0 ? "#f8f9fa" : "#e9ecef" }}>
                     <td>{item.team}</td>
                     <td>{item.odds}</td>

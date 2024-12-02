@@ -1,11 +1,13 @@
 body {
-  background-image: url('../../caroussel/public/images/backgroundHome.jpg'); 
+  background-image: url('../public/images/backgroundHome.jpg'); 
   background-size: cover; 
   background-repeat: no-repeat; 
   background-position: center center; 
+  background-attachment: fixed; 
   margin: 0; 
   height: 100vh; 
   width: 100vw; 
+
 }
 
 .textStyle {
