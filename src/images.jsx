@@ -1,5 +1,5 @@
 const listImages = [
-  { "id": 1, "name":"James Harden","url": "./images/37-James-Harden.jpg" },
+  { "id": 1, "name":"Anthony Davis","url": "./images/MV5BODU2M2NkYjctNGI0MC00MzVmLTk1MzgtNjljNjRjNTg2Mzc1XkEyXkFqcGc@._V1_.jpg" },
   { "id": 2, "name":"LeBron James","url": "./images/2425_PlayerPage_Headshot_1920x2304_James_LeBron.jpg" },
   { "id": 3, "name":"Shaquille O'Neal","url": "./images/1483215_original.jpg" },
   { "id": 4, "name":"Jayson Tatum","url": "./images/1244828797.jpg" },
