@@ -1,0 +1,123 @@
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+  }
+  
+  .user-management {
+    width: 90%;
+    margin: 20px auto;
+  }
+  
+  .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+  
+  .header h1 {
+    font-size: 24px;
+    font-weight: bold;
+  }
+  
+  .search-bar {
+    padding: 10px;
+    width: 200px;
+    margin-right: 10px;
+  }
+  
+  .add-user-btn {
+    padding: 10px 20px;
+    background-color: #ffd700;
+    border: none;
+    cursor: pointer;
+    font-weight: bold;
+    border-radius: 5px;
+  }
+  
+  .user-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+  }
+  
+  .user-table th, .user-table td {
+    padding: 15px;
+    text-align: left;
+    border-bottom: 1px solid #ccc;
+  }
+  
+  .user-info {
+    display: flex;
+    align-items: center;
+  }
+  
+  .user-avatar {
+    border-radius: 50%;
+    margin-right: 10px;
+  }
+  
+  .user-name {
+    font-weight: bold;
+  }
+  
+  .user-email {
+    color: #666;
+    font-size: 14px;
+  }
+  
+  .user-roles .role {
+    display: inline-block;
+    padding: 5px 10px;
+    margin: 2px;
+    border-radius: 5px;
+    color: white;
+  }
+  
+  .role.manager {
+    background-color: #f39c12;
+  }
+  
+  .role.admin {
+    background-color: #3498db;
+  }
+  
+  .role.auditor {
+    background-color: #2ecc71;
+  }
+  
+  .action-btn {
+    margin-right: 10px;
+    padding: 5px 10px;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    background-color: #3498db;
+    color: white;
+  }
+  
+  .action-btn.remove {
+    background-color: #e74c3c;
+  }
+  
+  .pagination {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 20px;
+  }
+  
+  .pagination button {
+    margin: 0 5px;
+    padding: 5px 10px;
+    background: #f1f1f1;
+    border: 1px solid #ccc;
+    cursor: pointer;
+  }
+  
+  .pagination .active {
+    background-color: #3498db;
+    color: white;
+    border: none;
+  }
+  
