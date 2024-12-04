@@ -18,36 +18,36 @@ export const fetchAllPoints = async () => {
     }
   };
 
-  export const login = async () => {
+  export const login = async (credentials) => {
     try {
-      const response = await axios.post(`http://localhost:3000/users/login`);
-      console.log(response.data); // log d'un user
+      const response = await axios.post(`http://localhost:3000/users/login`, credentials);
+      console.log(response.data);
     } catch (error) {
       console.error('Erreur lors du login :', error);
     }
   };
   
-  export const signin = async () => {
+  export const signin = async (userData) => {
     try {
-      const response = await axios.post(`http://localhost:3000/users/signIn`);
-      console.log(response.data); // creation d'un user
+      const response = await axios.post(`http://localhost:3000/users/signIn`, userData);
+      console.log(response.data);
     } catch (error) {
       console.error('Erreur lors du signin :', error);
     }
   };
 
-  export const updateUser = async (id) => {
+  export const updateUser = async (id, updateData) => {
     try {
-      const response = await axios.put(`http://localhost:3000/users/:${id}`);
-      console.log(response.data); // modification d'un user
+      const response = await axios.put(`http://localhost:3000/users/${id}`, updateData);
+      console.log(response.data);
     } catch (error) {
-      console.error('Erreur lors de la modification dun user :', error);
+      console.error('Erreur lors de la modification dun utilisateur :', error);
     }
-  };
+  }
 
   export const deleteUser = async (id) => {
     try {
-      const response = await axios.delete(`http://localhost:3000/users/:${id}`);
+      const response = await axios.delete(`http://localhost:3000/users/${id}`);
       console.log(response.data); // supression d'un user
     } catch (error) {
       console.error('Erreur lors de la supression dun user :', error);
