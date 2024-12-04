@@ -18,16 +18,17 @@ export const fetchAllPoints = async () => {
     }
   };
 
-  export const login = async (credentials) => {
+  export const login = async (email:string, password:string) => {
     try {
-      const response = await axios.post(`http://localhost:3000/users/login`, credentials);
+      const response = await axios.post(`http://localhost:3000/users/login`, {email, password});
       console.log(response.data);
+      return response.data;
     } catch (error) {
       console.error('Erreur lors du login :', error);
     }
   };
   
-  export const signin = async (userData) => {
+  export const signin = async (userData:Object) => {
     try {
       const response = await axios.post(`http://localhost:3000/users/signIn`, userData);
       console.log(response.data);
@@ -36,7 +37,7 @@ export const fetchAllPoints = async () => {
     }
   };
 
-  export const updateUser = async (id, updateData) => {
+  export const updateUser = async (id:string, updateData:Object) => {
     try {
       const response = await axios.put(`http://localhost:3000/users/${id}`, updateData);
       console.log(response.data);
@@ -45,7 +46,7 @@ export const fetchAllPoints = async () => {
     }
   }
 
-  export const deleteUser = async (id) => {
+  export const deleteUser = async (id:string) => {
     try {
       const response = await axios.delete(`http://localhost:3000/users/${id}`);
       console.log(response.data); // supression d'un user
