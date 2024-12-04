@@ -1,0 +1,37 @@
+.footer {
+    background-color: #17141d;;
+    width: 100%;
+    position:absolute;
+    bottom:0;
+    padding: 10px;
+    text-align: center;
+    padding-top: 20px;
+    padding-bottom: 10px;
+    
+    
+}
+
+.img-footer {
+    width: 20px;
+}
+
+.dunk {
+    font-size: 15px;
+}
+
+.text { 
+    font-size: 12px;
+}
+
+.copyright {
+    font-size: 10px;
+    font-style: italic;
+}
+
+.copy-cont {
+    padding: 10px;
+}
+
+.text-location {
+    font-size: 11px;
+}
