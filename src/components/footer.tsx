@@ -20,12 +20,14 @@ function Footer() {
          <h6 className="text">About DunkTheOdds</h6>
          <h6 className="text">Contact Us</h6>
          <h6 className="text">Terms of Use</h6>
-         <h6 className="text">Get help</h6>
+         <h6 className="text"><a href="https://www.ncpgambling.org/help-treatment/about-the-national-problem-gambling-helpline/#:~:text=1%2D800%2DGAMBLER%20is%20the,addiction%2C%20or%20their%20loved%20ones."> Get Help</a>
+         </h6>
          <h6 className="text">Legality</h6>
+         
 
 
         </div>
-            <div className="col">
+            <div className="col location">
             <h6 className="dunk">Location</h6>
             <div className="row">
             <div className="col">
@@ -41,7 +43,7 @@ function Footer() {
                 <h6 className="text"> 0039</h6>
             </div>
             </div>
-        </div>
+            </div>
     </div>
     <div className="copy-cont">
     <div className="row"></div>
