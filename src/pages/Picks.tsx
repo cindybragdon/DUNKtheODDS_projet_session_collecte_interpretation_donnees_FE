@@ -2,6 +2,7 @@ import React, { useState } from "react";
 
 import TableauMatchAjd from "../components/tableauMatchAjd.tsx";
 import Graphiques from "../components/graphiques.tsx";
+import SidebarComponent from "../components/sideBar.tsx";
 
 const Picks = () => {
   const [selectedTeam1, setSelectedTeam1] = useState<string>("");
@@ -24,60 +25,72 @@ const Picks = () => {
     { team: "Celtics", odds: "+110", points: 112, spread: -3.5 },
   ];
 
-
   return (
-    <div className="container-fluid p-4" style={{ overflowX: "hidden" }}>
-      <h1 className="text-center text-white mb-4">Statistiques des Picks</h1>
+    <div className="d-flex" style={{ minHeight: "100vh", overflowX: "hidden" }}>
+      {/* Sidebar */}
+      <SidebarComponent />
 
-      <div className="mb-3 d-flex justify-content-between flex-wrap" style={{ overflowX: "hidden" }}>
-        <div className="me-3" style={{ width: "30%", maxWidth: "300px" }}>
-          <label className="form-label text-white">Sélectionnez l'équipe 1</label>
-          <select
-            className="form-select"
-            value={selectedTeam1}
-            onChange={(e) => setSelectedTeam1(e.target.value)}
-          >
-            <option value="">Choisir une équipe</option>
-            {teams.map((team, index) => (
-              <option key={index} value={team}>
-                {team}
-              </option>
-            ))}
-          </select>
+      {/* Contenu principal */}
+      <div
+        className="container-fluid p-4"
+        style={{
+          marginLeft: "40px", // Correspond à la largeur repliée de la sidebar
+          marginRight:"40px",
+          transition: "margin-left 0.3s ease-in-out",
+        }}
+      >
+        <h1 className="text-center text-white mb-4">Statistiques des Picks</h1>
+
+        <div className="mb-3 d-flex justify-content-between flex-wrap">
+          <div className="me-3" style={{ width: "30%", maxWidth: "300px" }}>
+            <label className="form-label text-white">Sélectionnez l'équipe 1</label>
+            <select
+              className="form-select"
+              value={selectedTeam1}
+              onChange={(e) => setSelectedTeam1(e.target.value)}
+            >
+              <option value="">Choisir une équipe</option>
+              {teams.map((team, index) => (
+                <option key={index} value={team}>
+                  {team}
+                </option>
+              ))}
+            </select>
+          </div>
+
+          <div className="me-3" style={{ width: "30%", maxWidth: "300px" }}>
+            <label className="form-label text-white">Sélectionnez l'équipe 2</label>
+            <select
+              className="form-select"
+              value={selectedTeam2}
+              onChange={(e) => setSelectedTeam2(e.target.value)}
+            >
+              <option value="">Choisir une équipe</option>
+              {teams.map((team, index) => (
+                <option key={index} value={team}>
+                  {team}
+                </option>
+              ))}
+            </select>
+          </div>
+
+          <div style={{ width: "30%", maxWidth: "300px" }}>
+            <label className="form-label text-white">Sélectionnez le type de mise</label>
+            <select
+              className="form-select"
+              value={selectedBetType}
+              onChange={(e) => setSelectedBetType(e.target.value)}
+            >
+              <option value="points">Points</option>
+              <option value="spread">Spread</option>
+              <option value="moneyline">Moneyline</option>
+            </select>
+          </div>
         </div>
 
-        <div className="me-3" style={{ width: "30%", maxWidth: "300px" }}>
-          <label className="form-label text-white">Sélectionnez l'équipe 2</label>
-          <select
-            className="form-select"
-            value={selectedTeam2}
-            onChange={(e) => setSelectedTeam2(e.target.value)}
-          >
-            <option value="">Choisir une équipe</option>
-            {teams.map((team, index) => (
-              <option key={index} value={team}>
-                {team}
-              </option>
-            ))}
-          </select>
-        </div>
-
-        <div style={{ width: "30%", maxWidth: "300px" }}>
-          <label className="form-label text-white">Sélectionnez le type de mise</label>
-          <select
-            className="form-select"
-            value={selectedBetType}
-            onChange={(e) => setSelectedBetType(e.target.value)}
-          >
-            <option value="points">Points</option>
-            <option value="spread">Spread</option>
-            <option value="moneyline">Moneyline</option>
-          </select>
-        </div>
+        <Graphiques data={mockData} />
+        <TableauMatchAjd dataMatch={mockData} />
       </div>
-
-      <Graphiques data={mockData}/>
-      <TableauMatchAjd dataMatch={mockData}/>
     </div>
   );
 };
