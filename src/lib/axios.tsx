@@ -54,3 +54,12 @@ export const fetchAllPoints = async () => {
       console.error('Erreur lors de la supression dun user :', error);
     }
   };
+
+  export const getAllUsers = async () => {
+    try {
+      const response = await axios.get(`http://localhost:3000/users/`);
+      console.log(response.data); // affiche tous les users
+    } catch (error) {
+      console.error('Erreur lors du fetch des users :', error);
+    }
+  };
