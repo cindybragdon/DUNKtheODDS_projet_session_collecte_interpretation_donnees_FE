@@ -6,7 +6,12 @@ import Login from "./pages/Login.tsx";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import PrivateRoute from "./components/privateRoute.tsx";
 import UserManagement from "./pages/UserManagement.tsx";
+
 import MyAccount from "./pages/MyAccount.tsx";
+import ToS from "./pages/ToS.tsx";
+import About from "./pages/About.tsx";
+import Legality from "./pages/Legality.tsx";
+
 
 
 
@@ -30,6 +35,11 @@ function App() {
         <Route path="/login" element={<Login/>}/>
         <Route path="/signin" element={<SignUp/>}/>
         <Route path="/myaccount" element={<MyAccount/>}/>
+
+        <Route path="/ToS" element={<ToS/>}/>
+        <Route path="/About" element={<About/>}/>
+        <Route path="/Legality" element={<Legality/>}/>
+
       </Routes>
     </BrowserRouter>
   );
