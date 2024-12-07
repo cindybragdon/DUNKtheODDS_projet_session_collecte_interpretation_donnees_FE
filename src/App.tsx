@@ -6,6 +6,7 @@ import Login from "./pages/Login.tsx";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import PrivateRoute from "./components/privateRoute.tsx";
 import UserManagement from "./pages/UserManagement.tsx";
+import MyAccount from "./pages/MyAccount.tsx";
 
 
 
@@ -28,6 +29,7 @@ function App() {
         />
         <Route path="/login" element={<Login/>}/>
         <Route path="/signin" element={<SignUp/>}/>
+        <Route path="/myaccount" element={<MyAccount/>}/>
       </Routes>
     </BrowserRouter>
   );
