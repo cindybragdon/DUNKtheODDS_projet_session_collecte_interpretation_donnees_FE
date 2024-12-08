@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import '../../src/userManagement.css';
+import SidebarComponent from '../components/sideBar';
 
 const UserManagement = () => {
   const [users, setUsers] = useState([]);
@@ -68,6 +69,7 @@ const UserManagement = () => {
 
   return (
     <div className="user-management">
+      <SidebarComponent />
       <header className="header">
         <h1>User Management</h1>
         <div className="actions">

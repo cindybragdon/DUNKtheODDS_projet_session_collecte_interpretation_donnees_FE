@@ -3,6 +3,7 @@ import Carousel from '../components/carousel.tsx';
 import BoutonLogIn from '../components/boutonLogIn.tsx';
 import BoutonSignIn from '../components/boutonSignIn.tsx';
 import Footer from '../components/footer.tsx';
+import SidebarComponent from '../components/sideBar.tsx';
 
 
 function Home() {
@@ -12,6 +13,7 @@ function Home() {
         <div className='textStyle d-flex flex-column   justify-content-center align-items-center p-4 '>
 
             <div className='textStyle d-flex flex-rows justify-content-center align-items-center p-5 '>
+                    <SidebarComponent />
 
                     <BoutonLogIn/>
                     <Carousel/>

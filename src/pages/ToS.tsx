@@ -1,13 +1,15 @@
-import React from 'react'
+import React from 'react';
+import SidebarComponent from '../components/sideBar';
 
 const ToS = () => {
     return (
         <div>
-                <h5> Hello bitches
-                    
-                </h5>
+            <SidebarComponent />
+            <h5 className="text-center">
+                💎💎💎💎💎 Hello bitches... Let’s ditch the glitches and get rich with riches! 💎💎💎💎💎
+            </h5>
         </div>
-    )
-}
+    );
+};
 
 export default ToS;

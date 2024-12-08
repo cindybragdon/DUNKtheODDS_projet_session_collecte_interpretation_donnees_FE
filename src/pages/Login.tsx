@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import '../LogSign.css';
 import { login } from '../lib/axios';
+import SidebarComponent from '../components/sideBar';
 
 const LoginPage = () => {
   const [email, setEmail] = useState('');
@@ -40,6 +41,7 @@ const LoginPage = () => {
 
   return (
     <div className="overlay">
+      <SidebarComponent />
       <div className="flex max-h-screen text-center mt-5 p-5">
         <div className="sm:mx-auto sm:w-full sm:max-w-sm flex flex-col">
           <img

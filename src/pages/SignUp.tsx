@@ -1,9 +1,11 @@
 import React from 'react';
 import '../LogSign.css'
+import SidebarComponent from '../components/sideBar';
 
 const SignUpPage = () => {
   return (
     <div className='overlay'>
+      <SidebarComponent />
       <div className="flex max-h-screen text-center mt-5 p-5">
         <div className="sm:mx-auto sm:w-full sm:max-w-sm ">
           <img
