@@ -11,6 +11,8 @@ import About from "./pages/About.tsx";
 import Legality from "./pages/Legality.tsx";
 import TeamDashboard from "./pages/TeamDashboard.tsx";
 import NBAdashboard from "./pages/NBAdashboard.tsx";
+import PrivateRoute from "./components/privateRoute.tsx";
+import AdminRoute from "./components/adminRoute.tsx";
 
 function App() {
   const isAuthenticated = false; 
@@ -36,6 +38,7 @@ function App() {
           element={
             isAuthenticated ? <MyAccount /> : <Navigate to="/login" />
           }
+
         />
 
         {/**Route accessible a un user connecté qui a le role admin */}
@@ -49,6 +52,11 @@ function App() {
             )
           }
         />
+
+        <Route path='/user-management' element={<AdminRoute/>}>
+            <Route path='/user-management' element={<UserManagement/>}/>
+        </Route>
+
       </Routes>
     </BrowserRouter>
   );
