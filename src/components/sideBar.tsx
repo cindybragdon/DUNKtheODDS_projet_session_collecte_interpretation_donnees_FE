@@ -1,9 +1,8 @@
-//https://www.npmjs.com/package/react-pro-sidebar
-
 import React, { useState } from "react";
 import { Sidebar, Menu, MenuItem, sidebarClasses } from "react-pro-sidebar";
 import { Link } from "react-router-dom";
 import "@fortawesome/fontawesome-free/css/all.min.css";
+
 const SidebarComponent = () => {
   const [collapsed, setCollapsed] = useState(true);
   return (
@@ -52,7 +51,6 @@ const SidebarComponent = () => {
           icon={<i className="fa fa-home MenuItem" style={{ fontSize: "18px" }} />}
           component={<Link to="/" />}
         >
-          
         </MenuItem>
         <MenuItem
           icon={<i className="fa fa-dollar-sign MenuItem" style={{ fontSize: "18px" }} />}
@@ -67,7 +65,7 @@ const SidebarComponent = () => {
           LogIn
         </MenuItem>
         <MenuItem
-          icon={<i className="fa fa-user-plus MenuItem" style={{ fontSize: "18px",  }} />}
+          icon={<i className="fa fa-user-plus MenuItem" style={{ fontSize: "18px" }} />}
           component={<Link to="/signin" />}
         >
           SignIn
@@ -77,6 +75,18 @@ const SidebarComponent = () => {
           component={<Link to="/myaccount" />}
         >
           My Account
+        </MenuItem>
+        <MenuItem
+          icon={<i className="fa fa-tachometer-alt MenuItem" style={{ fontSize: "18px" }} />}
+          component={<Link to="/team-dashboard" />}
+        >
+          <span style={{ whiteSpace: "normal", wordWrap: "break-word" }}>Dashboard Équipe</span>
+        </MenuItem>
+        <MenuItem
+          icon={<i className="fa fa-basketball-ball MenuItem" style={{ fontSize: "18px" }} />}
+          component={<Link to="/nba-dashboard" />}
+        >
+          <span style={{ whiteSpace: "normal", wordWrap: "break-word" }}>Dashboard NBA</span>
         </MenuItem>
       </Menu>
     </Sidebar>
