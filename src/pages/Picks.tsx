@@ -1,41 +1,57 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import axios from "axios";
 
 import TableauMatchAjd from "../components/tableauMatchAjd.tsx";
 import Graphiques from "../components/graphiques.tsx";
 import SidebarComponent from "../components/sideBar.tsx";
 
+const fetchAllTeams = async () => {
+  try {
+    const response = await axios.get(`http://localhost:3000/teamScores`);
+    return response.data; 
+  } catch (error) {
+    console.error("Erreur lors de la récupération des équipes :", error);
+    return [];
+  }
+};
+
+const fetchAllTeamsScores = async () => {
+  try {
+    const response = await axios.get(`http://localhost:3000/teamScores`);
+    return response.data;
+  } catch (error) {
+    console.error("Erreur lors de la récupération des scores :", error);
+    return [];
+  }
+};
+
 const Picks = () => {
   const [selectedTeam1, setSelectedTeam1] = useState<string>("");
   const [selectedTeam2, setSelectedTeam2] = useState<string>("");
   const [selectedBetType, setSelectedBetType] = useState<string>("points");
+  const [teams, setTeams] = useState<any[]>([]); 
+  const [teamScores, setTeamScores] = useState<any[]>([]);
 
-  const teams = [
-    "Atlanta Hawks", "Boston Celtics", "Charlotte Hornets", 
-    "Chicago Bulls", "Cleveland Cavaliers", "Dallas Mavericks", "Denver Nuggets", 
-    "Detroit Pistons", "Houston Rockets", "Indiana Pacers", 
-    "Los Angeles Clippers", "Los Angeles Lakers", "Memphis Grizzlies", "Miami Heat", 
-    "Milwaukee Bucks", "Minnesota Timberwolves", "New Orleans Pelicans", "New York Knicks", 
-    "Oklahoma City Thunder", "Orlando Magic", "Philadelphia 76ers", "Phoenix Suns", 
-    "Portland Trail Blazers", "Sacramento Kings", "San Antonio Spurs", "Toronto Raptors", 
-    "Utah Jazz", "Washington Wizards"
-  ];
-
-  const mockData = [
-    { team: "Lakers", odds: "+120", points: 102, spread: -4.5 },
-    { team: "Celtics", odds: "+110", points: 112, spread: -3.5 },
-  ];
+  useEffect(() => {
+    const fetchData = async () => {
+      const fetchedTeams = await fetchAllTeams();
+      setTeams(fetchedTeams);
+      
+      const scores = await fetchAllTeamsScores();
+      setTeamScores(scores);
+    };
+    fetchData();
+  }, []);
 
   return (
     <div className="d-flex" style={{ minHeight: "100vh", overflowX: "hidden" }}>
-      {/* Sidebar */}
       <SidebarComponent />
 
-      {/* Contenu principal */}
       <div
         className="container-fluid p-4"
         style={{
-          marginLeft: "40px", // Correspond à la largeur repliée de la sidebar
-          marginRight:"40px",
+          marginLeft: "40px",
+          marginRight: "40px",
           transition: "margin-left 0.3s ease-in-out",
         }}
       >
@@ -51,8 +67,8 @@ const Picks = () => {
             >
               <option value="">Choisir une équipe</option>
               {teams.map((team, index) => (
-                <option key={index} value={team}>
-                  {team}
+                <option key={index} value={team.teamName}>
+                  {team.teamName}
                 </option>
               ))}
             </select>
@@ -67,8 +83,8 @@ const Picks = () => {
             >
               <option value="">Choisir une équipe</option>
               {teams.map((team, index) => (
-                <option key={index} value={team}>
-                  {team}
+                <option key={index} value={team.teamName}>
+                  {team.teamName}
                 </option>
               ))}
             </select>
@@ -88,8 +104,8 @@ const Picks = () => {
           </div>
         </div>
 
-        <Graphiques data={mockData} />
-        <TableauMatchAjd dataMatch={mockData} />
+        <Graphiques data={teamScores} />
+        <TableauMatchAjd dataMatch={teamScores} />
       </div>
     </div>
   );
