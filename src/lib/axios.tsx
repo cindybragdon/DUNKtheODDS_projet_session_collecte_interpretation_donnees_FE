@@ -22,6 +22,12 @@ export const fetchAllPoints = async () => {
     try {
       const response = await axios.post(`http://localhost:3000/users/login`, {email, password});
       console.log(response.data);
+      if(response.status !== 200) {
+        throw Error;
+      }
+
+      localStorage.setItem('user', JSON.stringify(response.data.user));
+      localStorage.setItem('token', response.data.token);
       return response.data;
     } catch (error) {
       console.error('Erreur lors du login :', error);

@@ -21,7 +21,7 @@ function Home() {
         
             </div>
             <div className='d-flex w-25 justify-content-center align-items-center font-family: "Space Grotesk", serif; '>
-                <img className='w-25 img-fluid' src={'./images/icone.png'}/><h1 className='text-white'>UNKtheODDS</h1>
+                <img className='w-25 img-fluid' src={'./images/icone.png'} alt="k"/><h1 className='text-white'>UNKtheODDS</h1>
             </div>
         </div>
         <footer>

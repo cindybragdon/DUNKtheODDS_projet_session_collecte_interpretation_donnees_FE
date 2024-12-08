@@ -2,8 +2,11 @@ import React, { useState } from 'react';
 import '../LogSign.css';
 import { login } from '../lib/axios';
 import SidebarComponent from '../components/sideBar';
+import { useNavigate } from 'react-router-dom';
+
 
 const LoginPage = () => {
+  const navigate = useNavigate();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState<string | null>(null);
@@ -30,6 +33,15 @@ const LoginPage = () => {
       const credentials = { email, password };
       const response = await login(credentials.email, credentials.password);
       console.log('Connexion réussie :', response?.data);
+      if(response) {
+        navigate('/picks');
+      } else {
+        setError(
+          'Échec de la connexion. Vérifiez vos identifiants.'
+        );
+      }
+
+
 
     } catch (err: any) {
       console.error('Erreur lors de la connexion :', err);
