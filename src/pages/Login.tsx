@@ -17,6 +17,7 @@ const LoginPage = () => {
       setError('Le mot de passe doit contenir au moins 6 caractères.');
       return false;
     }
+    
     setError(null);
     return true;
   };

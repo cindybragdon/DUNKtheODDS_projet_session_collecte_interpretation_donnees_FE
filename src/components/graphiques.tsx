@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import Chart from "chart.js/auto";
 
-const Graphiques = (props) => {
+const Graphiques = (props : any) => {
 
     useEffect(() => {
         const ctxPoints = document.getElementById("pointsChart") as HTMLCanvasElement;
@@ -12,10 +12,10 @@ const Graphiques = (props) => {
         Chart.getChart(ctxSpread)?.destroy();
         Chart.getChart(ctxMoneyline)?.destroy();
     
-        const teamNames = props.data.map((item) => item.team);
-        const teamPoints = props.data.map((item) => item.points);
-        const teamSpreads = props.data.map((item) => item.spread);
-        const teamOdds = props.data.map((item) => parseInt(item.odds.replace("+", "")) || 0);
+        const teamNames = props.data.map((item : any) => item.team);
+        const teamPoints = props.data.map((item : any) => item.points);
+        const teamSpreads = props.data.map((item : any ) => item.spread);
+        const teamOdds = props.data.map((item : any  ) => parseInt(item.odds.replace("+", "")) || 0);
     
         new Chart(ctxPoints, {
           type: "bar",
