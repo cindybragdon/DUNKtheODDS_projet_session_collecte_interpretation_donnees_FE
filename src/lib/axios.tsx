@@ -4,6 +4,7 @@ export const fetchAllTeamsScores = async () => {
   try {
     const response = await axios.get(`http://localhost:3000/teamScores`);
     console.log(response.data); // Affiche la liste des scores d'équipe
+    return response.data
   } catch (error) {
     console.error('Erreur lors de la récupération des scores :', error);
   }
@@ -13,6 +14,7 @@ export const fetchAllPoints = async () => {
     try {
       const response = await axios.get(`http://localhost:3000/teamScores`);
       console.log(response.data); // Affiche la liste de tous les points des équipes
+      return response.data;
     } catch (error) {
       console.error('Erreur lors de la récupération des points :', error);
     }

@@ -67,8 +67,10 @@ const Picks = () => {
             >
               <option value="">Choisir une équipe</option>
               {teams.map((team, index) => (
+                
                 <option key={index} value={team.teamName}>
                   {team.teamName}
+                  {console.log(team)}
                 </option>
               ))}
             </select>
