@@ -22,6 +22,12 @@ export const fetchAllPoints = async () => {
     try {
       const response = await axios.post(`http://localhost:3000/users/login`, {email, password});
       console.log(response.data);
+      if(response.status !== 200) {
+        throw Error;
+      }
+
+      localStorage.setItem('user', JSON.stringify(response.data.user));
+      localStorage.setItem('token', response.data.token);
       return response.data;
     } catch (error) {
       console.error('Erreur lors du login :', error);
@@ -52,5 +58,14 @@ export const fetchAllPoints = async () => {
       console.log(response.data); // supression d'un user
     } catch (error) {
       console.error('Erreur lors de la supression dun user :', error);
+    }
+  };
+
+  export const getAllUsers = async () => {
+    try {
+      const response = await axios.get(`http://localhost:3000/users/`);
+      console.log(response.data); // affiche tous les users
+    } catch (error) {
+      console.error('Erreur lors du fetch des users :', error);
     }
   };
