@@ -4,41 +4,23 @@ import axios from "axios";
 import TableauMatchAjd from "../components/tableauMatchAjd.tsx";
 import Graphiques from "../components/graphiques.tsx";
 import SidebarComponent from "../components/sideBar.tsx";
+import { fetchAllPoints, fetchAllTeamsInfos } from "../lib/axios.tsx";
 
-const fetchAllTeams = async () => {
-  try {
-    const response = await axios.get(`http://localhost:3000/teamScores`);
-    return response.data; 
-  } catch (error) {
-    console.error("Erreur lors de la récupération des équipes :", error);
-    return [];
-  }
-};
-
-const fetchAllTeamsScores = async () => {
-  try {
-    const response = await axios.get(`http://localhost:3000/teamScores`);
-    return response.data;
-  } catch (error) {
-    console.error("Erreur lors de la récupération des scores :", error);
-    return [];
-  }
-};
 
 const Picks = () => {
   const [selectedTeam1, setSelectedTeam1] = useState<string>("");
   const [selectedTeam2, setSelectedTeam2] = useState<string>("");
   const [selectedBetType, setSelectedBetType] = useState<string>("points");
   const [teams, setTeams] = useState<any[]>([]); 
-  const [teamScores, setTeamScores] = useState<any[]>([]);
+  const [points, setPoints] = useState<any[]>([]);
 
   useEffect(() => {
     const fetchData = async () => {
-      const fetchedTeams = await fetchAllTeams();
+      const fetchedTeams = await fetchAllTeamsInfos();
       setTeams(fetchedTeams);
       
-      const scores = await fetchAllTeamsScores();
-      setTeamScores(scores);
+      const scores = await fetchAllPoints();
+      setPoints(scores);
     };
     fetchData();
   }, []);
@@ -106,8 +88,8 @@ const Picks = () => {
           </div>
         </div>
 
-        <Graphiques data={teamScores} />
-        <TableauMatchAjd dataMatch={teamScores} />
+        <Graphiques data={points} />
+        <TableauMatchAjd dataMatch={points} />
       </div>
     </div>
   );
