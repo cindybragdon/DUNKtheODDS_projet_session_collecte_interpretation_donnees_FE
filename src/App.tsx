@@ -9,7 +9,7 @@ import MyAccount from "./pages/MyAccount.tsx";
 import ToS from "./pages/ToS.tsx";
 import About from "./pages/About.tsx";
 import Legality from "./pages/Legality.tsx";
-import TeamDashboard from "./pages/TeamDashboard.tsx";
+import TeamDashboard from "./pages/PointsDashboard.tsx";
 import NBAdashboard from "./pages/NBAdashboard.tsx";
 import PrivateRoute from "./components/privateRoute.tsx";
 import AdminRoute from "./components/adminRoute.tsx";
