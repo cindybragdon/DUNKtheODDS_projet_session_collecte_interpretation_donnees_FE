@@ -15,7 +15,7 @@ const Picks = () => {
   const [points, setPoints] = useState<any[]>([]);
 
   useEffect(() => {
-    const fetchData = async () => {
+    const fetchData = async () => { 
       const fetchedTeams = await fetchAllTeamsInfos();
       setTeams(fetchedTeams);
       
