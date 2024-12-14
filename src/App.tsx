@@ -11,7 +11,6 @@ import About from "./pages/About.tsx";
 import Legality from "./pages/Legality.tsx";
 import TeamDashboard from "./pages/PointsDashboard.tsx";
 import NBAdashboard from "./pages/NBAdashboard.tsx";
-import PrivateRoute from "./components/privateRoute.tsx";
 import AdminRoute from "./components/adminRoute.tsx";
 
 function App() {
