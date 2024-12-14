@@ -12,7 +12,6 @@ function Footer() {
           <div className="col">
             <h6 className="dunk">DunkTheOdds, Inc</h6>
             <h6 className="text">Montreal, QC</h6>
-            {/* Icônes FontAwesome */}
             <FontAwesomeIcon icon={faFacebook} className="icon" />
             <FontAwesomeIcon icon={faXTwitter} className="icon" />
             <FontAwesomeIcon icon={faSquareInstagram} className="icon" />

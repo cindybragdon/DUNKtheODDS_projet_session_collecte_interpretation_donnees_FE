@@ -80,13 +80,13 @@ const SidebarComponent = () => {
           icon={<i className="fa fa-tachometer-alt MenuItem" style={{ fontSize: "18px" }} />}
           component={<Link to="/team-dashboard" />}
         >
-          <span style={{ whiteSpace: "normal", wordWrap: "break-word" }}>Dashboard Équipe</span>
+          <span style={{ whiteSpace: "normal", wordWrap: "break-word" }}>Dashboard Points</span>
         </MenuItem>
         <MenuItem
           icon={<i className="fa fa-basketball-ball MenuItem" style={{ fontSize: "18px" }} />}
           component={<Link to="/nba-dashboard" />}
         >
-          <span style={{ whiteSpace: "normal", wordWrap: "break-word" }}>Dashboard NBA</span>
+          <span style={{ whiteSpace: "normal", wordWrap: "break-word" }}>Dashboard Ecart</span>
         </MenuItem>
       </Menu>
     </Sidebar>
