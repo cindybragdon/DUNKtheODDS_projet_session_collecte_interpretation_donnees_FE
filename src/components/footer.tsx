@@ -2,6 +2,7 @@ import React from "react";
 import "../footer.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faFacebook, faSquareInstagram, faXTwitter } from "@fortawesome/free-brands-svg-icons";
+import { Link } from "react-router-dom";
 
 
 function Footer() {
@@ -18,15 +19,23 @@ function Footer() {
           </div>
           <div className="col">
             <h6 className="dunk">Company</h6>
-            <h6 className="text">About DunkTheOdds</h6>
-            <h6 className="text">Contact Us</h6>
-            <h6 className="text">Terms of Use</h6>
+            <h6 className="text">
+            <Link to="/About">About DunkTheOdds</Link>
+            </h6>
+            <h6 className="text">
+            <Link to="/Contact">Contact Us</Link>
+            </h6>
+            <h6 className="text">
+            <Link to="/ToS">Terms of Service</Link>
+            </h6>
             <h6 className="text">
               <a href="https://www.ncpgambling.org/help-treatment/about-the-national-problem-gambling-helpline/#:~:text=1%2D800%2DGAMBLER%20is%20the,addiction%2C%20or%20their%20loved%20ones.">
                 Get Help
               </a>
             </h6>
-            <h6 className="text">Legality</h6>
+           <h6 className="text">
+           <Link to="/Legality">Legality</Link>
+           </h6>
           </div>
           <div className="col location">
             <h6 className="dunk">Location</h6>
