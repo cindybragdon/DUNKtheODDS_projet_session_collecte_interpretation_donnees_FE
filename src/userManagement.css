@@ -85,3 +85,18 @@ body {
 .action-btn.remove {
   background-color: #e74c3c;
 }
+
+.action-btn.update {
+  background-color: #6a0dad; /* Couleur violette */
+  color: white; /* Couleur des lettres */
+  border: none;
+  padding: 8px 16px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background-color 0.3s ease;
+}
+
+.action-btn.update:hover {
+  background-color: #4b0082; /* Couleur légèrement plus foncée au survol */
+}

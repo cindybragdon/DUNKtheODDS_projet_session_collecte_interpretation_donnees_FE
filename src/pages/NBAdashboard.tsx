@@ -1,7 +1,7 @@
 import React from "react";
 import SidebarComponent from "../components/sideBar";
 
-const About = () => {
+const NBAdashboard = () => {
     return(
         <div>
             <SidebarComponent />
@@ -10,4 +10,4 @@ const About = () => {
     )
 }
 
-export default About;
+export default NBAdashboard;

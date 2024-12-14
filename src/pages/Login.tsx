@@ -1,8 +1,12 @@
 import React, { useState } from 'react';
 import '../LogSign.css';
 import { login } from '../lib/axios';
+import SidebarComponent from '../components/sideBar';
+import { useNavigate } from 'react-router-dom';
+
 
 const LoginPage = () => {
+  const navigate = useNavigate();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState<string | null>(null);
@@ -13,10 +17,7 @@ const LoginPage = () => {
       setError('Le format de l’email est invalide.');
       return false;
     }
-    if (password.trim().length < 6) {
-      setError('Le mot de passe doit contenir au moins 6 caractères.');
-      return false;
-    }
+    
     setError(null);
     return true;
   };
@@ -29,7 +30,13 @@ const LoginPage = () => {
       const credentials = { email, password };
       const response = await login(credentials.email, credentials.password);
       console.log('Connexion réussie :', response?.data);
-
+      if(response) {
+        navigate('/picks');
+      } else {
+        setError(
+          'Échec de la connexion. Vérifiez vos identifiants.'
+        );
+      }
     } catch (err: any) {
       console.error('Erreur lors de la connexion :', err);
       setError(
@@ -39,30 +46,27 @@ const LoginPage = () => {
   };
 
   return (
-    <div className="overlay">
-      <div className="flex max-h-screen text-center mt-5 p-5">
-        <div className="sm:mx-auto sm:w-full sm:max-w-sm flex flex-col">
+    <div className="overlay body">
+      <SidebarComponent />
+      <div >
+        <div >
           <img
-            className="mx-auto max-w-xs"
-            style={{ width: '64px' }}
+             style={{ width: '100px' , marginLeft : '150px', paddingBottom: '30px'}}
             src={'./images/icone.png'}
             alt="Your Company"
           />
-          <h2 className="mt-10 text-center text-2xl/9 font-bold tracking-tight text-white">
+          <h2 style={{  color: 'white'}}>
             Connectez-vous à votre compte
           </h2>
         </div>
 
-        <div className="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-          <form className="space-y-6" onSubmit={handleSubmit}>
+        <div className="wrapper">
+          <form  onSubmit={handleSubmit}>
             {error && (
               <div className="text-red-500 text-sm text-center mb-4">{error}</div>
             )}
             <div>
-              <label htmlFor="email" className="block text-sm/6 font-medium text-white">
-                Adresse e-mail
-              </label>
-              <div className="mt-2">
+              <div className="input-box">
                 <input
                   type="email"
                   name="email"
@@ -71,16 +75,14 @@ const LoginPage = () => {
                   required
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  className="block w-full rounded-lg bg-white px-3 py-1.5 text-base text-black outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-900 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
+                  placeholder='Courriel'
                 />
               </div>
             </div>
 
             <div>
-              <label htmlFor="password" className="block text-sm/6 font-medium text-white">
-                Mot de passe
-              </label>
-              <div className="mt-2">
+             
+              <div className="input-box">
                 <input
                   type="password"
                   name="password"
@@ -89,7 +91,7 @@ const LoginPage = () => {
                   required
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
-                  className="rounded-lg block w-full bg-white px-3 py-1.5 text-base text-gray-900 outline outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6"
+                  placeholder='Mot de passe'
                 />
               </div>
             </div>
@@ -97,14 +99,14 @@ const LoginPage = () => {
             <div>
               <button
                 type="submit"
-                className="flex w-full justify-center rounded-full bg-indigo-600 px-3 py-1.5 text-sm/6 font-semibold text-black shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600 mt-4"
+                className="btn"
               >
                 Se connecter
               </button>
             </div>
           </form>
 
-          <p className="mt-10 text-center text-sm/6 text-gray-500">
+          <p className="mt-10 text-center text-sm/6 text-gray-500 p-4">
             <a
               href="/Signin"
               className="font-semibold text-purple-600 hover:text-pink-500 mt-4"

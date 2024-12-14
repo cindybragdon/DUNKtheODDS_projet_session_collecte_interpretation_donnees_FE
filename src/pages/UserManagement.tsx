@@ -1,112 +1,240 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import '../../src/userManagement.css';
-
-const mockUsers = [
-  { id: 1, firstName: 'Yeray', lastName: 'Rosales', email: 'yeray@email.com', role: 'Admin' },
-  { id: 2, firstName: 'Lennert', lastName: 'Nijenbijvank', email: 'lennert@email.com', role: 'User' },
-  { id: 3, firstName: 'Tallah', lastName: 'Cotton', email: 'tallah@email.com', role: 'Admin' },
-];
+import SidebarComponent from '../components/sideBar';
+import { deleteUser, getAllUsers, updateUser, signin } from '../lib/axios';
 
 const UserManagement = () => {
-  const [users, setUsers] = useState(mockUsers);
-  const [form, setForm] = useState({
-    firstName: '',
-    lastName: '',
+  const [users, setUsers] = useState<any>([{}]);
+  const [editableUserId, setEditableUserId] = useState<string | null>(null);
+  const [editForm, setEditForm] = useState({
+    username: '',
+    email: '',
+    password: '',
+    role: 'User',
+  });
+  const [newUserForm, setNewUserForm] = useState({
+    username: '',
     email: '',
     password: '',
     role: 'User',
   });
 
+  useEffect(() => {
+    const fetchData = async () => {
+      const users = await getAllUsers();
+      setUsers(users);
+    };
+    fetchData();
+  }, []);
+
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     const { name, value } = e.target;
-    setForm({ ...form, [name]: value });
+    if (editableUserId) {
+      setEditForm({ ...editForm, [name]: value });
+    } else {
+      setNewUserForm({ ...newUserForm, [name]: value });
+    }
   };
 
-  const addUser = () => {
-    if (!form.firstName || !form.lastName || !form.email || !form.password) {
-      alert('All fields are required!');
+  const handleAddUser = async () => {
+    if (!newUserForm.username || !newUserForm.email || !newUserForm.password) {
+      toast.error('Tous les champs sont requis !');
       return;
     }
+
     const newUser = {
-      id: users.length + 1,
-      firstName: form.firstName,
-      lastName: form.lastName,
-      email: form.email,
-      role: form.role,
+      username: newUserForm.username,
+      email: newUserForm.email,
+      password: newUserForm.password,
+      role: newUserForm.role,
     };
-    setUsers([...users, newUser]);
-    setForm({ firstName: '', lastName: '', email: '', password: '', role: 'User' });
+
+    try {
+      const addedUser = await signin(newUser); 
+      setUsers([...users, addedUser]); 
+      setNewUserForm({
+        username: '',
+        email: '',
+        password: '',
+        role: 'User',
+      });
+      toast.success('Utilisateur ajouté avec succès !');
+    } catch (error) {
+      toast.error('Erreur lors de l\'ajout de l\'utilisateur.');
+      console.error(error);
+    }
+  };
+
+  const handleEditClick = (user: any) => {
+    setEditableUserId(user._id);
+    setEditForm({
+      username: user.username,
+      email: user.email,
+      password: '', 
+      role: user.role,
+    });
+  };
+
+  const handleUpdateClick = async () => {
+    if (editableUserId) {
+      const updatedUser = {
+        username: editForm.username,
+        email: editForm.email,
+        password: editForm.password || undefined, 
+        role: editForm.role,
+      };
+
+      try {
+        await updateUser(editableUserId, updatedUser);
+        const updatedUsers = users.map((user: any) =>
+          user._id === editableUserId ? { ...user, ...updatedUser } : user
+        );
+        setUsers(updatedUsers);
+        setEditableUserId(null);
+        toast.success('Utilisateur mis à jour avec succès !');
+      } catch (error) {
+        toast.error('Erreur lors de la mise à jour de l\'utilisateur.');
+        console.error(error);
+      }
+    }
+  };
+
+  const handleDeleteClick = async (userId: string) => {
+    try {
+      await deleteUser(userId);
+      setUsers(users.filter((user: any) => user._id !== userId));
+      toast.success('Utilisateur supprimé avec succès !');
+    } catch (error) {
+      toast.error('Erreur lors de la suppression de l\'utilisateur.');
+      console.error(error);
+    }
   };
 
   return (
     <div className="user-management">
+      <SidebarComponent />
       <header className="header">
         <h1>User Management</h1>
+      </header>
+      <div className="add-user-section">
+        <h3>Ajouter un utilisateur</h3>
         <div className="actions">
           <input
             type="text"
-            name="firstName"
-            placeholder="First Name"
-            value={form.firstName}
-            onChange={handleInputChange}
-          />
-          <input
-            type="text"
-            name="lastName"
-            placeholder="Last Name"
-            value={form.lastName}
+            name="username"
+            placeholder="Username"
+            value={newUserForm.username}
             onChange={handleInputChange}
           />
           <input
             type="email"
             name="email"
             placeholder="Email"
-            value={form.email}
+            value={newUserForm.email}
             onChange={handleInputChange}
           />
           <input
             type="password"
             name="password"
             placeholder="Password"
-            value={form.password}
+            value={newUserForm.password}
             onChange={handleInputChange}
           />
-          <select name="role" value={form.role} onChange={handleInputChange}>
+          <select name="role" value={newUserForm.role} onChange={handleInputChange}>
             <option value="User">User</option>
             <option value="Admin">Admin</option>
           </select>
-          <button className="add-user-btn" onClick={addUser}>
-            Add User
+          <button className="add-user-btn" onClick={handleAddUser}>
+            Ajouter un utilisateur
           </button>
         </div>
-      </header>
+      </div>
+      <br></br>
+      <h3>Pour modifier un utilisateur, cliquez sur le champ erroné</h3>
       <table className="user-table">
         <thead>
           <tr>
-            <th>First Name</th>
-            <th>Last Name</th>
+            <th>Username</th>
             <th>Email</th>
+            <th>Password</th>
             <th>Role</th>
             <th>Actions</th>
           </tr>
         </thead>
         <tbody>
-          {users.map((user) => (
-            <tr key={user.id}>
-              <td>{user.firstName}</td>
-              <td>{user.lastName}</td>
-              <td>{user.email}</td>
+          {users?.map((user: any) => (
+            <tr key={user?._id}>
               <td>
-                <span className={`role-badge ${user.role.toLowerCase()}`}>{user.role}</span>
+                {editableUserId === user?._id ? (
+                  <input
+                    type="text"
+                    name="username"
+                    value={editForm.username}
+                    onChange={handleInputChange}
+                  />
+                ) : (
+                  <span onClick={() => handleEditClick(user)}>{user?.username}</span>
+                )}
               </td>
               <td>
-                <button className="action-btn edit">Modify Roles</button>
-                <button className="action-btn remove">Remove User</button>
+                {editableUserId === user?._id ? (
+                  <input
+                    type="email"
+                    name="email"
+                    value={editForm.email}
+                    onChange={handleInputChange}
+                  />
+                ) : (
+                  <span onClick={() => handleEditClick(user)}>{user?.email}</span>
+                )}
+              </td>
+              <td>
+                {editableUserId === user?._id ? (
+                  <input
+                    type="password"
+                    name="password"
+                    value={editForm.password}
+                    onChange={handleInputChange}
+                    placeholder="Enter new password"
+                  />
+                ) : (
+                  <span onClick={() => handleEditClick(user)}>******</span>
+                )}
+              </td>
+              <td>
+                {editableUserId === user?._id ? (
+                  <select
+                    name="role"
+                    value={editForm.role}
+                    onChange={handleInputChange}
+                  >
+                    <option value="User">User</option>
+                    <option value="Admin">Admin</option>
+                  </select>
+                ) : (
+                  <span onClick={() => handleEditClick(user)}>{user?.role}</span>
+                )}
+              </td>
+              <td>
+                <button
+                  className="action-btn remove"
+                  onClick={() => handleDeleteClick(user?._id)}
+                >
+                  Remove User
+                </button>
+                {editableUserId === user?._id && (
+                  <button className="action-btn update" onClick={handleUpdateClick}>
+                    Update User
+                  </button>
+                )}
               </td>
             </tr>
           ))}
         </tbody>
       </table>
+      <ToastContainer position="top-right" autoClose={3000} />
     </div>
   );
 };
