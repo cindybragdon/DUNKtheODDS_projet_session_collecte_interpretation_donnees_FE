@@ -34,6 +34,7 @@ const TeamGraphPointsByGame = () => {
         callbacks: {
           label: function(context) {
             return `Points: ${context.raw}`;
+
           },
         },
       },

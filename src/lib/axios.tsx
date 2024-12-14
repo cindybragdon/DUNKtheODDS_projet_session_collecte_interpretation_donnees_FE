@@ -39,7 +39,6 @@ export const fetchAllPoints = async () => {
   export const signin = async (userData:Object) => {
     try {
       const response = await axios.post(`http://localhost:3000/users/signIn`, userData);
-      console.log(response.data);
       return response.data;
     } catch (error) {
       console.error('Erreur lors du signin :', error);
