@@ -12,6 +12,7 @@ import Legality from "./pages/Legality.tsx";
 import TeamDashboard from "./pages/PointsDashboard.tsx";
 import NBAdashboard from "./pages/NBAdashboard.tsx";
 import AdminRoute from "./components/adminRoute.tsx";
+import Contact from "./pages/Contact.tsx";
 
 function App() {
   const isAuthenticated = false; 
@@ -30,6 +31,7 @@ function App() {
         <Route path="/Legality" element={<Legality />} />
         <Route path="/team-dashboard" element={<TeamDashboard />} />
         <Route path="/nba-dashboard" element={<NBAdashboard />} />
+        <Route path="/Contact" element={<Contact />} />
 
         {/**Route accessible a un user connecté */}
         <Route
