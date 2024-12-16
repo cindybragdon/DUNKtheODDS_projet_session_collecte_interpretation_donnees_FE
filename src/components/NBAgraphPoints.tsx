@@ -14,20 +14,20 @@ const nbaTeams = [
   "Jazz", "Wizards",
 ];
 
-// Mock data pour les 30 équipes
 const mockData: Record<string, number[]> = {};
 nbaTeams.forEach((team) => {
   mockData[team] = Array.from({ length: 6 }, () => Math.floor(Math.random() * 50 + 100)); 
 });
 
-// 5 meilleures équipes NBA
 const top5Teams = ["Warriors", "Bucks", "Celtics", "Nuggets", "Lakers"]; 
 
 const CompareTeamsPoints = () => {
   const [selectedTeams, setSelectedTeams] = useState<TeamOption[]>([]);
 
   const handleSelectChange = (selected: TeamOption[]) => {
-    setSelectedTeams(selected);
+    if (selected.length <= 5) {
+      setSelectedTeams(selected);
+    }
   };
 
   const getColor = (index: number): string => {
@@ -48,7 +48,6 @@ const CompareTeamsPoints = () => {
     })),
   };
 
-  
   const top5Data = {
     labels: Array.from({ length: 6 }, (_, i) => `Match ${i + 1}`), 
     datasets: top5Teams.map((team, index) => ({
@@ -84,7 +83,13 @@ const CompareTeamsPoints = () => {
               color: "black",
             }),
           }}
+          maxMenuHeight={200}
         />
+        {selectedTeams.length === 5 && (
+          <div style={{ color: "white", marginTop: "10px" }}>
+             Vous pouvez sélectionner un maximum de 5 équipes.
+          </div>
+        )}
       </div>
 
       <div style={{ display: "flex", justifyContent: "center", width: "100%" }}>

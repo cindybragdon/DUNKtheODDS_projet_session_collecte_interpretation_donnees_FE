@@ -9,7 +9,7 @@ import SidebarComponent from '../components/sideBar.tsx';
 function Home() {
 
     return(
-        <div>
+        <div className='overlay'>
         <div className='textStyle d-flex flex-column   justify-content-center align-items-center p-4 '>
 
             <div className='textStyle d-flex flex-rows justify-content-center align-items-center p-5 '>
