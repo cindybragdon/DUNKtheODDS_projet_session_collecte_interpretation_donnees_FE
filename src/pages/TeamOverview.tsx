@@ -61,12 +61,13 @@ const TeamOverview = () => {
             justifyContent: "center",
             alignItems: "center",
             margin: "20px",
-            background: "#e8f5e9",
+            background: "rgba(255, 255, 255, 0.8)", // Couleur blanche translucide
             borderRadius: "10px",
             padding: "20px",
             width: "60%",
             marginLeft: "auto",
             marginRight: "auto",
+            boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
           }}
         >
           {selectedTeam ? (
