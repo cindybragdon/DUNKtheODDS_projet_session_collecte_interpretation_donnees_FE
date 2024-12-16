@@ -14,6 +14,7 @@ import AdminRoute from "./components/adminRoute.tsx";
 import Contact from "./pages/Contact.tsx";
 import TeamOverview from "./pages/TeamOverview.tsx"; // Toues les infos et stats d'une équipe : Bilan des victoires et défaites à domicile ou non, Performances récentes (Points), Derniers résultats des matchs , Nombre total de matchs joués , Bilan général contre les autres équipes 
 import UserManagement from "./pages/UserManagement.tsx"; //Page admin où l'administrateur pour faire le CRUD des users et changer leur role
+import ConnectedRoute from "./components/connectedRoute.tsx";
 
 function App() {
   const isAuthenticated = false; 
@@ -36,15 +37,11 @@ function App() {
 
         <Route path="/team-overview" element={<TeamOverview />} />
 
-
+    
         {/**Route accessible a un user connecté */}
-        <Route
-          path="/myaccount"
-          element={
-            isAuthenticated ? <MyAccount /> : <Navigate to="/login" />
-          }
-
-        />
+        <Route path='/myaccount' element={<ConnectedRoute/>}>
+            <Route path='/myaccount' element={<MyAccount/>}/>
+        </Route>
 
         {/**Route accessible a un user connecté qui a le role admin */}
         <Route
