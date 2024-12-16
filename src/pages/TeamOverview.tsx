@@ -68,6 +68,7 @@ const TeamOverview = () => {
             marginLeft: "auto",
             marginRight: "auto",
             boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
+            color: "black", // Couleur du texte noire
           }}
         >
           {selectedTeam ? (
