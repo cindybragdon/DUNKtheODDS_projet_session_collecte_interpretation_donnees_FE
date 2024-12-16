@@ -1,10 +1,12 @@
-import React from "react";
+import React, { useEffect } from "react";
 import SidebarComponent from "../components/sideBar";
 import Footer from "../components/footer";
 
 const Contact = () => {
-    return(
+    
+    return (
         <div>
+
                     <SidebarComponent />
                   
         <div className='textStyle d-flex flex-column   justify-content-center align-items-center p-4'>
@@ -38,5 +40,6 @@ const Contact = () => {
         </div> 
     )
 }
+
 
 export default Contact;

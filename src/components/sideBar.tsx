@@ -54,7 +54,7 @@ const SidebarComponent = () => {
         </MenuItem>
 
         <MenuItem
-          icon={<i className="fa fa-sign-in-alt MenuItem" style={{ fontSize: "18px"}} />}
+          icon={<i className="fa fa-sign-in-alt MenuItem" style={{ fontSize: "18px" }} />}
           component={<Link to="/login" />}
         >
           LogIn
@@ -89,6 +89,15 @@ const SidebarComponent = () => {
           component={<Link to="/nba-dashboard" />}
         >
           <span style={{ whiteSpace: "normal", wordWrap: "break-word" }}>Dashboard Ecart</span>
+        </MenuItem>
+        {/* Nouvelle entrée Équipe Overview */}
+        <MenuItem
+          icon={<i className="fa fa-users MenuItem" style={{ fontSize: "18px" }} />}
+          component={<Link to="/team-overview" />}
+        >
+          <span style={{ whiteSpace: "normal", wordWrap: "break-word" }}>
+            Équipe <br /> Overview
+          </span>
         </MenuItem>
       </Menu>
     </Sidebar>

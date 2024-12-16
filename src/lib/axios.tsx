@@ -11,14 +11,29 @@ export const fetchAllTeamsInfos = async () => {
 };
 
 export const fetchAllPoints = async () => {
-    try {
-      const response = await axios.get(`http://localhost:3000/points`);
-      console.log(response.data); // Affiche la liste de tous les points des équipes
-      return response.data;
-    } catch (error) {
-      console.error('Erreur lors de la récupération des points :', error);
-    }
-  };
+  try {
+    const response = await axios.get(`http://localhost:3000/points`);
+    console.log("Réponse brute de l'API :", response);
+    console.log("Données retournées par l'API :", response.data);
+    return response.data;
+  } catch (error) {
+    console.error("Erreur lors de la récupération des points :", error);
+    throw error; 
+  }
+};
+
+
+export const fetchAllGames = async () => {
+  try {
+    const response = await axios.get(`http://localhost:3000/games`);
+    console.log("Réponse brute de l'API :", response);
+    console.log("Données retournées par l'API :", response.data);
+    return response.data;
+  } catch (error) {
+    console.error("Erreur lors de la récupération des games :", error);
+    throw error; 
+  }
+};
 
   export const login = async (email:string, password:string) => {
     try {
