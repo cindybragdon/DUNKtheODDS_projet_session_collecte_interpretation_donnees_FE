@@ -43,18 +43,9 @@ function App() {
             <Route path='/myaccount' element={<MyAccount/>}/>
         </Route>
 
-        {/**Route accessible a un user connecté qui a le role admin */}
-        <Route
-          path="/user-management"
-          element={
-            isAuthenticated && isAdmin ? (
-              <UserManagement />
-            ) : (
-              <Navigate to={isAuthenticated ? "/" : "/login"} />
-            )
-          }
-        />
 
+
+        {/**Route accessible a un user connecté qui a le role admin */}
         <Route path='/user-management' element={<AdminRoute/>}>
             <Route path='/user-management' element={<UserManagement/>}/>
         </Route>
