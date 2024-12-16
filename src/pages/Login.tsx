@@ -3,6 +3,7 @@ import '../LogSign.css';
 import { login } from '../lib/axios';
 import SidebarComponent from '../components/sideBar';
 import { useNavigate } from 'react-router-dom';
+import Footer from '../components/footer';
 
 
 const LoginPage = () => {
@@ -116,6 +117,8 @@ const LoginPage = () => {
           </p>
         </div>
       </div>
+      
+          <Footer/>
     </div>
   );
 };

@@ -3,6 +3,7 @@ import '../LogSign.css';
 import SidebarComponent from '../components/sideBar';
 import { useNavigate } from 'react-router-dom';
 import { signin } from '../lib/axios';
+import Footer from '../components/footer';
 
 const SignUpPage = () => {
   const navigate = useNavigate();
@@ -128,6 +129,7 @@ const SignUpPage = () => {
           </p>
         </div>
       </div>
+      <Footer/>
     </div>
   );
 };

@@ -69,6 +69,7 @@ const TeamOverview = () => {
             marginRight: "auto",
             boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
             color: "black", // Couleur du texte noire
+          
           }}
         >
           {selectedTeam ? (
@@ -104,6 +105,7 @@ const TeamOverview = () => {
           )}
         </div>
       </div>
+
     </div>
   );
 };
