@@ -1,41 +1,98 @@
 import React, { useState, useEffect } from "react";
 import SidebarComponent from "../components/sideBar";
 import teamsLogos from "../teamsLogos";
-import axios from "axios";
+
+import { fetchAllGames, fetchAllTeamsInfos } from "../lib/axios";
 
 const TeamOverview = () => {
   const [selectedTeam, setSelectedTeam] = useState<any>(null);
-  const [teamStats, setTeamStats] = useState<any>(null);
+  const [teamInfo, setTeam] = useState<any>(null);
   const [loading, setLoading] = useState<boolean>(false);
-
+  const [avgHomePointsScored, setAvgHomePointsScored] = useState(0);
+  const [avgAwayPointsScored, setAvgAwayPointsScored] = useState(0);
+  const [avgHomePointsAllowed, setAvgHomePointsAllowed] = useState(0);
+  const [avgAwayPointsAllowed, setAvgAwayPointsAllowed] = useState(0);
   const handleTeamChange = (event: any) => {
     const team = teamsLogos.find((t) => t.abbrev === event.target.value);
     setSelectedTeam(team);
   };
 
-  const fetchTeamStats = async (teamName: string) => {
-    setLoading(true);
-    try {
-      const response = await axios.get(`/api/team-stats/${teamName}`);
-      setTeamStats(response.data);
-    } catch (error) {
-      console.error("Erreur lors de la récupération des statistiques:", error);
-    } finally {
-      setLoading(false);
-    }
-  };
+
 
   useEffect(() => {
+
+
+    const fetchTeamStats = async (teamName: string) => {
+      setLoading(true);
+      try {
+        const fetchedTeams = await fetchAllTeamsInfos();
+
+        const teamData = fetchedTeams.filter((team: { teamName: string; }) => team.teamName === teamName);
+        console.log(teamData);
+        setTeam(teamData[0]);
+          
+      
+        const games = await fetchAllGames();
+
+        const homePointsList = games
+        .filter((game: any) => game.homeTeamName === teamData[0].teamName)
+        .map((game:any) => game.homePoints);
+
+
+        const awayPointsList = games
+        .filter((game: any) => game.awayTeamName === teamData[0].teamName)
+        .map((game:any) => game.awayPoints);
+
+
+        const homePoints = homePointsList.reduce((sum: any, num: any) => sum + num, 0);
+        const awayPoints = awayPointsList.reduce((sum: any, num: any) => sum + num, 0);
+        const avgHomePointScored = homePoints / homePointsList.length;
+        const avgAwayPointScored = awayPoints / awayPointsList.length;
+
+        setAvgHomePointsScored(Math.trunc(avgHomePointScored));
+        setAvgAwayPointsScored(Math.trunc(avgAwayPointScored));
+
+
+
+
+        const homePointsAllowedLists = games
+        .filter((game: any) => game.homeTeamName === teamData[0].teamName)
+        .map((game:any) => game.awayPoints);
+
+
+        const awayPointsAllowedList = games
+        .filter((game: any) => game.awayTeamName === teamData[0].teamName)
+        .map((game:any) => game.homePoints);
+
+
+        const homePointsAllowed = homePointsAllowedLists.reduce((sum: any, num: any) => sum + num, 0);
+        const awayPointsAllowed = awayPointsAllowedList.reduce((sum: any, num: any) => sum + num, 0);
+        const avgHomePointAllowed = homePointsAllowed / homePointsAllowedLists.length;
+        const avgAwayPointAllowed = awayPointsAllowed / awayPointsAllowedList.length;
+
+        setAvgHomePointsAllowed(Math.trunc(avgHomePointAllowed));
+        setAvgAwayPointsAllowed(Math.trunc(avgAwayPointAllowed));
+
+      } catch (error) {
+        console.error("Erreur lors de la récupération des statistiques:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
     if (selectedTeam) {
-      fetchTeamStats(selectedTeam.name);
+      const fullTeamName = `${selectedTeam.region} ${selectedTeam.name}`;
+      console.log(fullTeamName)
+      fetchTeamStats(fullTeamName);
     }
   }, [selectedTeam]);
 
+console.log(teamInfo)
   return (
     <div>
       <SidebarComponent />
       <div style={{ padding: "20px", marginLeft: "50px" }}>
-        <h1 style={{ textAlign: "center" }}>Vue d'ensemble par équipe</h1>
+        <h1 style={{ textAlign: "center" }}>Vue d'ensemble par équipe en 2024</h1>
         <h3 style={{ textAlign: "center" }}>Toutes les stats de votre équipe au même endroit</h3>
         <div style={{ margin: "20px 0", textAlign: "center" }}>
           <label htmlFor="team-select">Choisissez une équipe : </label>
@@ -86,17 +143,19 @@ const TeamOverview = () => {
               ) : (
                 <div>
                   <h3>Statistiques de l'équipe</h3>
-                  <p><strong>Nombre de parties jouées :</strong> {teamStats?.gamesPlayed || "Non disponible"}</p>
-                  <p><strong>Victoires :</strong> {teamStats?.wins || "Non disponible"}</p>
-                  <p><strong>Défaites :</strong> {teamStats?.losses || "Non disponible"}</p>
-                  <h4>Performances en points</h4>
-                  <p><strong>Moyenne des points marqués :</strong> {teamStats?.pointsAvg || "Non disponible"}</p>
-                  <p><strong>Moyenne des points encaissés :</strong> {teamStats?.pointsAllowedAvg || "Non disponible"}</p>
+                  <p><strong>Nombre de parties jouées :</strong> {teamInfo?.homeWins + teamInfo?.awayWins + teamInfo?.homeLosts + teamInfo?.awayLosts || "Non disponible"}</p>
+                  <p><strong>Victoires :</strong> {teamInfo?.homeWins + teamInfo?.awayWins || "Non disponible"}</p>
+                  <p><strong>Défaites :</strong> {teamInfo?.homeLosts + teamInfo?.awayLosts || "Non disponible"}</p>
+                  <h4>Performances à l'extérieur</h4>
+                  <p><strong>Victoires :</strong> {teamInfo?.awayWins || "Non disponible"}</p>
+                  <p><strong>Défaites :</strong> {teamInfo?.awayLosts || "Non disponible"}</p>
+                  <p><strong>Moyenne des points marqués :</strong> {avgAwayPointsScored || "Non disponible"}</p>
+                  <p><strong>Moyenne des points encaissés :</strong> {avgAwayPointsAllowed || "Non disponible"}</p>
                   <h4>Performance à domicile</h4>
-                  <p><strong>Victoires :</strong> {teamStats?.homeWins || "Non disponible"}</p>
-                  <p><strong>Défaites :</strong> {teamStats?.homeLosses || "Non disponible"}</p>
-                  <p><strong>Moyenne des points marqués :</strong> {teamStats?.homePointsAvg || "Non disponible"}</p>
-                  <p><strong>Moyenne des points encaissés :</strong> {teamStats?.homePointsAllowedAvg || "Non disponible"}</p>
+                  <p><strong>Victoires :</strong> {teamInfo?.homeWins || "Non disponible"}</p>
+                  <p><strong>Défaites :</strong> {teamInfo?.homeLosts || "Non disponible"}</p>
+                  <p><strong>Moyenne des points marqués :</strong> {avgHomePointsScored || "Non disponible"}</p>
+                  <p><strong>Moyenne des points encaissés :</strong> {avgHomePointsAllowed || "Non disponible"}</p>
                 </div>
               )}
             </div>
