@@ -65,7 +65,7 @@ const SignUpPage = () => {
       <div className="">
         <div className="">
           <img
-            style={{ width: '100px' , marginLeft : '150px', paddingBottom: '30px'}}
+            style={{ width: '100px' , paddingBottom: '30px'}}
             src={'./images/icone.png'}
           />
           <h2 className="" style={{ marginLeft : '60px', color: 'white'}}>Créez votre compte</h2>
