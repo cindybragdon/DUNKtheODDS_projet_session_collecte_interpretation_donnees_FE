@@ -100,7 +100,7 @@ const Picks = () => {
               </div>
             </div>
 
-            <Graphiques data={points} />
+            <Graphiques games={games} teams={teams} selectedTeam1={selectedTeam1} selectedTeam2={selectedTeam2}/>
             <TableauMatchAjd dataMatch={points} />
             <MatchsAujourdHui data={games} />
           </>
