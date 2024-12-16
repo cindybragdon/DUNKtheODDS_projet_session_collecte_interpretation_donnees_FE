@@ -89,7 +89,7 @@ body {
   width: 0%;
   height: 100%;
   background: rgb(0,154,217);
-  background: linear-gradient(90deg, rgba(0,154,217,1) 0%, rgba(217,147,0,1) 65%, rgba(255,186,0,1) 100%);
+  background: linear-gradient(90deg, rgba(158,56,35,1) 0%, rgba(217,147,0,1) 65%, rgba(217,150,76,1) 100%);
   transition: 0.6s ease-out;
 }
 
@@ -131,7 +131,7 @@ svg {
 }
 
 .custom-button {
-  background: linear-gradient(90deg, rgba(0,154,217,1) 0%, rgba(217,147,0,1) 65%, rgba(255,186,0,1) 100%);
+  background: linear-gradient(90deg, rgba(158,56,35,1) 0%, rgba(217,147,0,1) 65%, rgba(217,150,76,1) 100%);
   border: none;
   color: white;
   font-size: 1.2rem;

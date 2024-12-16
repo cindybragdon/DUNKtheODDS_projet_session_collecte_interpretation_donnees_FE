@@ -10,7 +10,7 @@ const SidebarComponent = () => {
       collapsed={collapsed}
       rootStyles={{
         [`.${sidebarClasses.container}`]: {
-          backgroundColor: "#1c2b36",
+          backgroundColor: "#343436",
           color: "#fff",
           position: "fixed",
           top: 0,
@@ -52,12 +52,7 @@ const SidebarComponent = () => {
           component={<Link to="/" />}
         >
         </MenuItem>
-        <MenuItem
-          icon={<i className="fa fa-dollar-sign MenuItem" style={{ fontSize: "18px" }} />}
-          component={<Link to="/picks" />}
-        >
-          Picks
-        </MenuItem>
+
         <MenuItem
           icon={<i className="fa fa-sign-in-alt MenuItem" style={{ fontSize: "18px" }} />}
           component={<Link to="/login" />}
@@ -77,11 +72,18 @@ const SidebarComponent = () => {
           My Account
         </MenuItem>
         <MenuItem
+          icon={<i className="fa fa-dollar-sign MenuItem" style={{ fontSize: "18px" }} />}
+          component={<Link to="/picks" />}
+        >
+          Picks
+        </MenuItem>
+        <MenuItem
           icon={<i className="fa fa-tachometer-alt MenuItem" style={{ fontSize: "18px" }} />}
           component={<Link to="/team-dashboard" />}
         >
           <span style={{ whiteSpace: "normal", wordWrap: "break-word" }}>Dashboard Points</span>
         </MenuItem>
+        
         <MenuItem
           icon={<i className="fa fa-basketball-ball MenuItem" style={{ fontSize: "18px" }} />}
           component={<Link to="/nba-dashboard" />}

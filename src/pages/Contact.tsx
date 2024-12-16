@@ -1,66 +1,45 @@
 import React, { useEffect } from "react";
 import SidebarComponent from "../components/sideBar";
+import Footer from "../components/footer";
 
 const Contact = () => {
-    // Console log pour vérifier si le composant est rendu
-    useEffect(() => {
-        console.log("Contact component rendered");
-    }, []);
-
+    
     return (
         <div>
-            <SidebarComponent />
-            {/* Contenu principal de la page Contact */}
-            <div style={{ padding: "20px" }}>
-                <h1>Contactez-nous</h1>
-                <p>Si vous avez des questions, n'hésitez pas à nous écrire.</p>
-                <form>
-                    <label>
-                        <strong>Nom :</strong>
-                        <input
-                            type="text"
-                            name="name"
-                            style={{ margin: "10px 0", display: "block", width: "100%" }}
-                        />
-                    </label>
-                    <label>
-                        <strong>Email :</strong>
-                        <input
-                            type="email"
-                            name="email"
-                            style={{ margin: "10px 0", display: "block", width: "100%" }}
-                        />
-                    </label>
-                    <label>
-                        <strong>Message :</strong>
-                        <textarea
-                            placeholder="Votre message..."
-                            style={{
-                                margin: "10px 0",
-                                display: "block",
-                                width: "100%",
-                                height: "100px",
-                            }}
-                        />
-                    </label>
-                    <button
-                        type="submit"
-                        style={{
-                            marginTop: "10px",
-                            padding: "10px 20px",
-                            backgroundColor: "#007BFF",
-                            color: "white",
-                            border: "none",
-                            borderRadius: "5px",
-                            cursor: "pointer",
-                        }}
-                    >
-                        Envoyer
-                    </button>
-                </form>
-            </div>
+
+                    <SidebarComponent />
+                  
+        <div className='textStyle d-flex flex-column   justify-content-center align-items-center p-4'>
+            
+            <div className='d-flex w-25 justify-content-center align-items-center font-family: "Space Grotesk", serif; '>
+            <img className='w-25 img-fluid' src={'./images/icone.png'} alt="k"/><h1 className='text-white'>UNKtheODDS</h1>
         </div>
-    );
-};
+        <div>
+      <h1>Contact Us</h1>
+      <form>
+        <div>
+          <label htmlFor="name">Votre nom:</label> <br></br>
+          <input type="text" id="name" placeholder="Votre nom" /><br></br>
+        </div>
+        <div>
+          <label htmlFor="email">Email:</label> <br></br>
+          <input type="email" id="email" placeholder="Votre email" /> <br></br>
+        </div>
+        <div>
+          <label htmlFor="message">Message:</label> <br></br>
+          <textarea id="message" placeholder="Votre message"></textarea> <br></br>
+        </div>
+        <div>
+          <button type="submit">Envoyer </button>
+        </div>
+      </form>
+      <br></br><br></br><br></br><br></br><br></br>
+    </div>
+        </div> 
+        <Footer/>
+        </div> 
+    )
+}
+
 
 export default Contact;

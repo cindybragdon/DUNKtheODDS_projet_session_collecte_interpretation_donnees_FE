@@ -15,7 +15,6 @@ import Contact from "./pages/Contact.tsx";
 import TeamOverview from "./pages/TeamOverview.tsx"; // Toues les infos et stats d'une équipe : Bilan des victoires et défaites à domicile ou non, Performances récentes (Points), Derniers résultats des matchs , Nombre total de matchs joués , Bilan général contre les autres équipes 
 import UserManagement from "./pages/UserManagement.tsx"; //Page admin où l'administrateur pour faire le CRUD des users et changer leur role
 
-
 function App() {
   const isAuthenticated = false; 
   const isAdmin = false; 
@@ -34,7 +33,9 @@ function App() {
         <Route path="/team-dashboard" element={<TeamDashboard />} />
         <Route path="/nba-dashboard" element={<NBAdashboard />} />
         <Route path="/Contact" element={<Contact />} />
+
         <Route path="/team-overview" element={<TeamOverview />} />
+
 
         {/**Route accessible a un user connecté */}
         <Route
