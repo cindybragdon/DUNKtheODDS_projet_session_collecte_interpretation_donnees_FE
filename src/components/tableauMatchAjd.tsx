@@ -23,7 +23,7 @@ const TableauMatchAjd = (props: any) => {
               >
                 <td>{item.homeTeamName}</td>
                 <td>{item.team1Moneyline}</td>
-                <td>{item.homePoints}</td>
+                <td>{props.overUnders[index]}</td>
                 <td>{item.homePoints - item.awayPoints}</td>
               </tr>
               <tr
@@ -33,7 +33,7 @@ const TableauMatchAjd = (props: any) => {
               >
                 <td>{item.awayTeamName}</td>
                 <td>{item.team2Moneyline}</td>
-                <td>{item.awayPoints}</td>
+                <td>{props.overUnders[index]}</td>
                 <td>{item.awayPoints - item.homePoints}</td>
               </tr>
             </tbody>

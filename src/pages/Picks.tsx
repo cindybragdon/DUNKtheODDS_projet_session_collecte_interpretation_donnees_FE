@@ -6,6 +6,9 @@ import Graphiques from "../components/graphiques.tsx";
 import SidebarComponent from "../components/sideBar.tsx";
 import { fetchAllGames, fetchAllPoints, fetchAllTeamsInfos } from "../lib/axios.tsx";
 import MatchsAujourdHui from "../components/matchsAujourdhui.tsx";
+import GraphMoneyline from "../components/graphMoneyline.tsx";
+import GraphOverUnder from "../components/overUnder.tsx";
+import OverUnder from "../components/overUnder.tsx";
 
 const Picks = () => {
   const [selectedTeam1, setSelectedTeam1] = useState<string>("");
@@ -101,7 +104,8 @@ const Picks = () => {
             </div>
 
             <Graphiques games={games} teams={teams} selectedTeam1={selectedTeam1} selectedTeam2={selectedTeam2}/>
-        
+            <GraphMoneyline />
+            <OverUnder games={games} selectedTeam1={selectedTeam1} selectedTeam2={selectedTeam2} />
             <MatchsAujourdHui data={games} />
           </>
         )}
