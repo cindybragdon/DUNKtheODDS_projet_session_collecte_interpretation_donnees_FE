@@ -174,20 +174,24 @@ const DashboardEcart = () => {
         <div className='select-container'>
         <select onChange={(e) => (setHomeTeam(e.target.value))} value={homeTeam} className='SelectOption'>
         <option value ="" disabled>Selectionnez une Team</option>
-        {teamNames.map((name: any  , index: any) => (
-                <option key={index} value = {name}>
-                    {name}
-                </option>
-            ))}
+        {teamNames
+          .filter((name) => name !== awayTeam) 
+          .map((name: any, index: any) => (
+              <option key={index} value={name}>
+                  {name}
+              </option>
+          ))}
         </select>
 
         <select id = 'team-select' onChange={(e) => setAwayTeam(e.target.value)} value={awayTeam} className='SelectOption'>
             <option value ="" disabled>Selectionnez une Team</option>
-            {teamNames.map((name: any , index: any) => (
-                <option key={index}  value={name}  >
-                    {name}
-                </option>
-            ))}
+            {teamNames
+              .filter((name) => name !== homeTeam) 
+              .map((name: any, index: any) => (
+                  <option key={index} value={name}>
+                      {name}
+                  </option>
+              ))}
         </select>
         </div>
         <div className='select-container-h1'  >
