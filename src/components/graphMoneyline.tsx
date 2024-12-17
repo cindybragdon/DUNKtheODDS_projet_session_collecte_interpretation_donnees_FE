@@ -13,10 +13,10 @@ function calculateProbabilities(probability:number) {
     }
 
     if (probability > 0.5) {
-        // Favorite: Negative moneyline
+ 
         return -Math.round((probability / (1 - probability)) * 100);
     } else {
-        // Underdog: Positive moneyline
+
         return Math.round(((1 - probability) / probability) * 100);
     }
 }
@@ -51,17 +51,17 @@ export function calculateMoneyline(games:any, selectedTeam1Name:string, selected
 Chart.register(...registerables);
 
 interface MoneylineChartProps {
-    teamA: number; // Final moneyline odds for Team A
-    teamB: number; // Final moneyline odds for Team B
+    teamA: number; 
+    teamB: number; 
 }
 
 const GraphMoneyLine: React.FC<MoneylineChartProps> = ({ teamA, teamB }) => {
     const data: ChartData<'bar'> = {
-        labels: ['Team A', 'Team B'], // X-axis labels
+        labels: ['Team A', 'Team B'], 
         datasets: [
             {
                 label: 'Moneyline Odds',
-                data: [teamA, teamB], // Final odds
+                data: [teamA, teamB], 
                 backgroundColor: ['blue', 'red'],
                 borderColor: ['blue', 'red'],
                 borderWidth: 1
@@ -79,7 +79,7 @@ const GraphMoneyLine: React.FC<MoneylineChartProps> = ({ teamA, teamB }) => {
             tooltip: {
                 callbacks: {
                     label: (context) => {
-                        const rawValue = Number(context.raw); // Ensure rawValue is a number
+                        const rawValue = Number(context.raw);
                         return `Odds: ${rawValue > 0 ? '+' : ''}${rawValue}`;
                     }
                 }
@@ -93,7 +93,7 @@ const GraphMoneyLine: React.FC<MoneylineChartProps> = ({ teamA, teamB }) => {
                 },
                 ticks: {
                     callback: (value) => {
-                        const numericValue = Number(value); // Ensure value is a number
+                        const numericValue = Number(value); 
                         return `${numericValue > 0 ? '+' : ''}${numericValue}`;
                     }
                 }
