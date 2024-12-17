@@ -14,6 +14,7 @@ const Picks = () => {
   const [teams, setTeams] = useState<any[]>([]);
   const [points, setPoints] = useState<any[]>([]);
   const [games, setGames] = useState<any[]>([]);
+  const [error, setError] = useState<string>("");
 
   useEffect(() => {
     const fetchData = async () => {
@@ -33,8 +34,32 @@ const Picks = () => {
     fetchData();
   }, []);
 
+  const handleTeam1Change = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    const team1 = e.target.value;
+    setSelectedTeam1(team1);
+
+    if (team1 === selectedTeam2) {
+      setError("Les deux équipes ne peuvent pas être identiques.");
+      setSelectedTeam2(""); 
+    } else {
+      setError(""); 
+    }
+  };
+
+  const handleTeam2Change = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    const team2 = e.target.value;
+    setSelectedTeam2(team2);
+
+    if (team2 === selectedTeam1) {
+      setError("Les deux équipes ne peuvent pas être identiques.");
+      setSelectedTeam1(""); 
+    } else {
+      setError(""); 
+    }
+  };
+
   return (
-    <div className="d-flex" style={{ minHeight: "100vh", overflowX: "hidden" }}>
+    <div className="d-flex s" style={{ minHeight: "100vh", overflowX: "hidden" }}>
       <SidebarComponent />
 
       <div
@@ -59,7 +84,7 @@ const Picks = () => {
                 <select
                   className="form-select"
                   value={selectedTeam1}
-                  onChange={(e) => setSelectedTeam1(e.target.value)}
+                  onChange={handleTeam1Change}
                 >
                   <option value="">Choisir une équipe</option>
                   {teams.map((team, index) => (
@@ -75,7 +100,7 @@ const Picks = () => {
                 <select
                   className="form-select"
                   value={selectedTeam2}
-                  onChange={(e) => setSelectedTeam2(e.target.value)}
+                  onChange={handleTeam2Change}
                 >
                   <option value="">Choisir une équipe</option>
                   {teams.map((team, index) => (
@@ -99,6 +124,12 @@ const Picks = () => {
                 </select>
               </div>
             </div>
+
+            {error && (
+              <div className="text-danger text-center" style={{ fontSize: "18px" }}>
+                {error}
+              </div>
+            )}
 
             <Graphiques data={points} />
             <TableauMatchAjd dataMatch={points} />
