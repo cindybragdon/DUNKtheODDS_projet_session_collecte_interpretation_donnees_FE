@@ -45,91 +45,166 @@ const DashboardEcart = () => {
             labels: Array.from({ length: filteredTeam.length }, (_, index) => `Match ${index + 1}`), 
             datasets : [{
             label : homeTeam,
-            data : filteredTeam.map(((hometeam : any) => hometeam.homePoints)),
-            borderColor: 'rgba(255, 99, 132, 1)',
-            backgroundColor: 'rgb(255, 99, 132)',
+            data : filteredTeam.map((hometeam: { homePoints: number; awayPoints: number }) => {
+                return hometeam.homePoints - hometeam.awayPoints;
+              }),
+            borderColor: 'rgb(185, 75, 102)',
+            backgroundColor: 'rgb(59, 20, 30, 0.5)',
             borderWidth: 2,
             borderRadius: Number.MAX_VALUE,
             borderSkipped: false
         },
         {
             label: awayTeam,
-            data:  filteredTeam.map(((hometeam : any) => hometeam.awayPoints)),
-            borderColor: 'rgba(54, 162, 235, 1)',
-            backgroundColor: 'rgba(54, 162, 235, 0.5)',
+            data:  filteredTeam.map((hometeam: { homePoints: number; awayPoints: number }) => {
+                return hometeam.awayPoints - hometeam.homePoints ;
+              }),
+            borderColor: 'rgb(90, 141, 101)',
+            backgroundColor: 'rgba(17, 54, 26, 0.5)',
             borderWidth: 2,
             borderRadius: 5,
             borderSkipped: false
         },
         ],
     };
+    console.log(filteredTeam)
     const options = {
         responsive: true,
-        maintainAspectRatio: false, 
+        animation: {
+          duration: 1000,
+          easing: 'easeInOutQuart',
+        },
         plugins: {
-        legend: {
+          legend: {
             display: true,
             position: 'top',
             labels: {
-            textAlign: 'center',
+              boxWidth: 15,
+              font: {
+                size: 12,
+                weight: 'bold',
+                family: 'Arial',
+              },
+              color: '#fff',
+              padding: 20,
+              usePointStyle: true,
             },
-        },
-        tooltip: {
-        callbacks: {
-            label: function(context : any) {
-            return `Points: ${context.raw}`;
-
+          },
+          tooltip: {
+            backgroundColor: 'rgba(0, 0, 0, 0.8)',
+            titleFont: { size: 14, weight: 'bold' },
+            bodyFont: { size: 12 },
+            bodySpacing: 8,
+            padding: 10,
+            displayColors: false,
+            callbacks: {
+              label: function (context: any) {
+                return `Points: ${context.raw}`;
+              },
             },
-        },
-        },
-    },
-    scales: {
-        x: {
-        type: 'category', 
-        title: {
+          },
+          title: {
             display: true,
-            text: 'Écart sur 5 match',
+            text: "Performance d'une rencontre en se basant sur l'écart",
+            font: {
+              size: 18,
+              weight: 'bold',
+            },
+            padding: {
+              top: 10,
+              bottom: 30,
+            },
+            color: '#fff',
+          },
         },
-        },
-        y: {
-        title: {
-            display: true,
-            text: 'Écart',
+        scales: {
+          x: {
+            type: 'category',
+            title: {
+              display: true,
+              text: 'Match',
+              color: '#fff',
+              font: {
+                size: 14,
+                weight: 'bold',
+              },
+            },
+            grid: {
+              display: true,
+              color: 'rgba(255, 255, 255, 0.2)',
+              borderDash: [5, 5],
+            },
+            ticks: {
+              color: '#fff',
+              font: {
+                size: 12,
+              },
+            },
+          },
+          y: {
+            title: {
+              display: true,
+              text: 'Écart',
+              color: '#fff',
+              font: {
+                size: 14,
+                weight: 'bold',
+              },
             },
             beginAtZero: true,
+            grid: {
+              color: 'rgba(255, 255, 255, 0.2)',
+              borderDash: [5, 5],
+            },
+            ticks: {
+              color: '#fff',
+              font: {
+                size: 12,
+              },
+              stepSize: 10,
+            },
+          },
         },
-    },
-    };
+      };
+      
     
     console.log(filteredTeam);
     return(
-        <>
+        <div className='body2'>
+        <div className='select-container'>
         <select onChange={(e) => (setHomeTeam(e.target.value))} value={homeTeam} className='SelectOption'>
-            {teamNames.map((name: any  , index: any) => (
+        <option value ="" disabled>Selectionnez une Team</option>
+        {teamNames.map((name: any  , index: any) => (
                 <option key={index} value = {name}>
                     {name}
                 </option>
             ))}
         </select>
 
-        <select onChange={(e) => setAwayTeam(e.target.value)} value={awayTeam} className='SelectOption'>
+        <select id = 'team-select' onChange={(e) => setAwayTeam(e.target.value)} value={awayTeam} className='SelectOption'>
+            <option value ="" disabled>Selectionnez une Team</option>
             {teamNames.map((name: any , index: any) => (
-                <option key={index}  value={name} >
+                <option key={index}  value={name}  >
                     {name}
                 </option>
             ))}
         </select>
-        <h1 className='TeamName'>{homeTeam}</h1>
-        <h1>{awayTeam}</h1>
+        </div>
+        <div className='select-container-h1'  >
+            <h1 className='TeamName' >{homeTeam}</h1>
+            <h1>{awayTeam}</h1>
+        </div>
         {filteredTeam.length === 0 ? (
-        <p>No data available for the selected teams</p> 
+        <p>Ces teams ne ce sont pas encore rencontrés.</p> 
     ) : (
-        <Line data={data} className="Graph" style={{ flex: 1, maxWidth: '50%', textAlign: 'center',marginLeft: '25%' }} />
+        <div className='box' >
+            <Bar data={data} options={options} className="Graph" style={{ flex: 1, maxWidth: '70%', textAlign: 'center',marginLeft: '80px'}} />
+        </div>
     )}
         
         
         
-        </>
+        </div>
     );
 
 }
