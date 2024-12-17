@@ -46,9 +46,11 @@ const SignUpPage = () => {
     } else {
       try {
         const response = await signin(user);
-        console.log(response?.data);
+        console.log(response);
         if (response) {
           navigate('/login');
+        } else{
+          setError('Cette email existe déja.');
         }
       } catch (e: any) {
         console.error('Erreur lors de la connexion :', e);

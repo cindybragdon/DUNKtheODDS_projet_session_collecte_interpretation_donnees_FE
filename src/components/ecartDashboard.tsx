@@ -122,7 +122,7 @@ const DashboardEcart = () => {
             type: 'category',
             title: {
               display: true,
-              text: 'Match',
+              text: 'Nombre de rencontres',
               color: '#fff',
               font: {
                 size: 14,
@@ -174,33 +174,47 @@ const DashboardEcart = () => {
         <div className='select-container'>
         <select onChange={(e) => (setHomeTeam(e.target.value))} value={homeTeam} className='SelectOption'>
         <option value ="" disabled>Selectionnez une Team</option>
-        {teamNames.map((name: any  , index: any) => (
-                <option key={index} value = {name}>
-                    {name}
-                </option>
-            ))}
+        {teamNames
+          .filter((name) => name !== awayTeam) 
+          .map((name: any, index: any) => (
+              <option key={index} value={name}>
+                  {name}
+              </option>
+          ))}
         </select>
 
         <select id = 'team-select' onChange={(e) => setAwayTeam(e.target.value)} value={awayTeam} className='SelectOption'>
             <option value ="" disabled>Selectionnez une Team</option>
-            {teamNames.map((name: any , index: any) => (
-                <option key={index}  value={name}  >
-                    {name}
-                </option>
-            ))}
+            {teamNames
+              .filter((name) => name !== homeTeam) 
+              .map((name: any, index: any) => (
+                  <option key={index} value={name}>
+                      {name}
+                  </option>
+              ))}
         </select>
         </div>
         <div className='select-container-h1'  >
-            <h1 className='TeamName' >{homeTeam}</h1>
-            <h1>{awayTeam}</h1>
+            <h1 style={{ color : 'white' , fontStyle: 'italic'}} >{homeTeam}</h1>
+            <h1 style={{ color : 'white',fontStyle: 'italic' }} >{awayTeam}</h1>
         </div>
-        {filteredTeam.length === 0 ? (
-        <p>Ces teams ne ce sont pas encore rencontrés.</p> 
-    ) : (
-        <div className='box' >
-            <Bar data={data} options={options} className="Graph" style={{ flex: 1, maxWidth: '70%', textAlign: 'center',marginLeft: '80px'}} />
-        </div>
-    )}
+
+        
+        {homeTeam.length === 0 || awayTeam.length === 0 ? (
+          <h1 style={{ color : 'white'}} >Veuillez choisir des teams</h1>
+         ) : filteredTeam.length === 0 ? (
+          <h1 style={{ color : 'white'}} >Ces teams ne se sont pas encore rencontrés.</h1>
+        ) : (
+          <div className='box'>
+            <Bar
+              data={data}
+              options={options}
+              className='Graph'
+              style={{ flex: 1, maxWidth: '70%', textAlign: 'center', marginLeft: '80px' }}
+            />
+  </div>
+)}
+
         
         
         
