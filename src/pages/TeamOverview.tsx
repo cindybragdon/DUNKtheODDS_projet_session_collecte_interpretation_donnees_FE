@@ -52,9 +52,6 @@ const TeamOverview = () => {
         setAvgHomePointsScored(Math.trunc(avgHomePointScored));
         setAvgAwayPointsScored(Math.trunc(avgAwayPointScored));
 
-
-
-
         const homePointsAllowedLists = games
         .filter((game: any) => game.homeTeamName === teamData[0].teamName)
         .map((game:any) => game.awayPoints);
