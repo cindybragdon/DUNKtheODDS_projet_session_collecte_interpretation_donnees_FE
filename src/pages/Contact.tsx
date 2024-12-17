@@ -5,7 +5,7 @@ import Footer from "../components/footer";
 const Contact = () => {
     
     return (
-        <div>
+        <div className="overlay">
 
                     <SidebarComponent />
                   

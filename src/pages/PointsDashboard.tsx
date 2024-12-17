@@ -4,6 +4,7 @@ import CompareTeamsPoints from "../components/NBAgraphPoints";
 
 const PointsDashboard = () => {
   return (
+    <div className="">
     <div style={{ display: "flex", height: "100vh" }}>
       <div style={{ flex: "0 0 75px", borderRight: "1px solid #ccc" }}>
         <SidebarComponent />
@@ -11,7 +12,7 @@ const PointsDashboard = () => {
       <div style={{ flex: 1, padding: "20px" }}>
         <CompareTeamsPoints />
       </div>
-    </div>
+    </div></div>
   );
 };
 

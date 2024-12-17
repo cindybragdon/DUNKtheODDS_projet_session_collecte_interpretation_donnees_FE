@@ -86,7 +86,7 @@ const TeamOverview = () => {
 
 console.log(teamInfo)
   return (
-    <div>
+    <div className="overlay">
       <SidebarComponent />
       <div style={{ padding: "20px", marginLeft: "50px" }}>
         <h1 style={{ textAlign: "center" }}>Vue d'ensemble par équipe en 2024</h1>
