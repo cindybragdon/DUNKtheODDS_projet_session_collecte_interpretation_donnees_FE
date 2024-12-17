@@ -56,7 +56,7 @@ export const fetchAllGames = async () => {
       const response = await axios.post(`http://localhost:3000/users/signIn`, userData);
       return response.data;
     } catch (error) {
-      console.error('Erreur lors du signin :', error);
+      console.error('Erreur lors du signin :', error); 
     }
   };
 

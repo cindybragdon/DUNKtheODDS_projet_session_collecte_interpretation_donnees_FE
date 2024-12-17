@@ -22,7 +22,6 @@
   justify-content: center;
   align-items: center;
   min-height: 100vh;
-  
 
 }
 .dunk{
@@ -41,6 +40,7 @@ color: #ffff;
 padding: 30px 40px;
 border-radius: 10px;
 margin-bottom: 300px;
+align-items: center;
 }
 
 .wrapper h1 {

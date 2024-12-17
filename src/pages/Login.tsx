@@ -52,7 +52,7 @@ const LoginPage = () => {
       <div >
         <div >
           <img
-             style={{ width: '100px' , marginLeft : '150px', paddingBottom: '30px'}}
+             style={{ width: '100px', paddingBottom: '30px'}}
             src={'./images/icone.png'}
             alt="Your Company"
           />

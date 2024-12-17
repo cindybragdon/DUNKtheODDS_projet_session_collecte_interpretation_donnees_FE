@@ -1,11 +1,10 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios";
-
-import TableauMatchAjd from "../components/tableauMatchAjd.tsx";
 import Graphiques from "../components/graphiques.tsx";
 import SidebarComponent from "../components/sideBar.tsx";
 import { fetchAllGames, fetchAllPoints, fetchAllTeamsInfos } from "../lib/axios.tsx";
 import MatchsAujourdHui from "../components/matchsAujourdhui.tsx";
+import GraphMoneyline, { calculateMoneyline } from "../components/graphMoneyline.tsx";
+import OverUnder from "../components/overUnder.tsx";
 
 const Picks = () => {
   const [selectedTeam1, setSelectedTeam1] = useState<string>("");
@@ -16,6 +15,7 @@ const Picks = () => {
   const [games, setGames] = useState<any[]>([]);
   const [error, setError] = useState<string>("");
 
+  const [moneyLines, setMoneyLines] = useState<any[]>([]);
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -33,6 +33,7 @@ const Picks = () => {
     };
     fetchData();
   }, []);
+
 
   const handleTeam1Change = (e: React.ChangeEvent<HTMLSelectElement>) => {
     const team1 = e.target.value;
@@ -57,6 +58,13 @@ const Picks = () => {
       setError(""); 
     }
   };
+
+
+
+  useEffect(() => {
+    const moneyLines = calculateMoneyline(games, selectedTeam1, selectedTeam2)
+    setMoneyLines(moneyLines)
+  }, [games, selectedTeam1, selectedTeam2]);
 
   return (
     <div className="d-flex s" style={{ minHeight: "100vh", overflowX: "hidden" }}>
@@ -124,6 +132,13 @@ const Picks = () => {
                 </select>
               </div>
             </div>
+            <div>
+
+              <Graphiques games={games} teams={teams} selectedTeam1={selectedTeam1} selectedTeam2={selectedTeam2}/>
+              <GraphMoneyline teamA={moneyLines[0]} teamB={moneyLines[1]} />
+              <OverUnder games={games} selectedTeam1={selectedTeam1} selectedTeam2={selectedTeam2} />
+            </div>
+
 
             {error && (
               <div className="text-danger text-center" style={{ fontSize: "18px" }}>
@@ -131,8 +146,7 @@ const Picks = () => {
               </div>
             )}
 
-            <Graphiques data={points} />
-            <TableauMatchAjd dataMatch={points} />
+
             <MatchsAujourdHui data={games} />
           </>
         )}

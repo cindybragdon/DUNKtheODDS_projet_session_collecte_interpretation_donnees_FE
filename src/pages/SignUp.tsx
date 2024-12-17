@@ -46,9 +46,11 @@ const SignUpPage = () => {
     } else {
       try {
         const response = await signin(user);
-        console.log(response?.data);
+        console.log(response);
         if (response) {
           navigate('/login');
+        } else{
+          setError('Cette email existe déja.');
         }
       } catch (e: any) {
         console.error('Erreur lors de la connexion :', e);
@@ -65,7 +67,7 @@ const SignUpPage = () => {
       <div className="">
         <div className="">
           <img
-            style={{ width: '100px' , marginLeft : '150px', paddingBottom: '30px'}}
+            style={{ width: '100px' , paddingBottom: '30px'}}
             src={'./images/icone.png'}
           />
           <h2 className="" style={{ marginLeft : '60px', color: 'white'}}>Créez votre compte</h2>
@@ -90,7 +92,7 @@ const SignUpPage = () => {
                 name="username"
                 id="username"
                 value={username}
-                placeholder="Nom d/'utilisateur"
+                placeholder="Nom d'utilisateur"
                 onChange={(e) => handleOnChange(e)}
                 required
               
