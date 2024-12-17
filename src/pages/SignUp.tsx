@@ -90,7 +90,7 @@ const SignUpPage = () => {
                 name="username"
                 id="username"
                 value={username}
-                placeholder="Nom d/'utilisateur"
+                placeholder="Nom d'utilisateur"
                 onChange={(e) => handleOnChange(e)}
                 required
               
