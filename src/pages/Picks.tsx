@@ -1,11 +1,10 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios";
-
-import TableauMatchAjd from "../components/tableauMatchAjd.tsx";
 import Graphiques from "../components/graphiques.tsx";
 import SidebarComponent from "../components/sideBar.tsx";
 import { fetchAllGames, fetchAllPoints, fetchAllTeamsInfos } from "../lib/axios.tsx";
 import MatchsAujourdHui from "../components/matchsAujourdhui.tsx";
+import GraphMoneyline, { calculateMoneyline } from "../components/graphMoneyline.tsx";
+import OverUnder from "../components/overUnder.tsx";
 
 const Picks = () => {
   const [selectedTeam1, setSelectedTeam1] = useState<string>("");
@@ -15,6 +14,7 @@ const Picks = () => {
   const [points, setPoints] = useState<any[]>([]);
   const [games, setGames] = useState<any[]>([]);
 
+  const [moneyLines, setMoneyLines] = useState<any[]>([]);
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -33,6 +33,11 @@ const Picks = () => {
     fetchData();
   }, []);
 
+
+  useEffect(() => {
+    const moneyLines = calculateMoneyline(games, selectedTeam1, selectedTeam2)
+    setMoneyLines(moneyLines)
+  }, [games, selectedTeam1, selectedTeam2]);
   return (
     <div className="d-flex" style={{ minHeight: "100vh", overflowX: "hidden" }}>
       <SidebarComponent />
@@ -99,9 +104,13 @@ const Picks = () => {
                 </select>
               </div>
             </div>
+            <div>
 
-            <Graphiques games={games} teams={teams} selectedTeam1={selectedTeam1} selectedTeam2={selectedTeam2}/>
-        
+              <Graphiques games={games} teams={teams} selectedTeam1={selectedTeam1} selectedTeam2={selectedTeam2}/>
+              <GraphMoneyline teamA={moneyLines[0]} teamB={moneyLines[1]} />
+              <OverUnder games={games} selectedTeam1={selectedTeam1} selectedTeam2={selectedTeam2} />
+            </div>
+
             <MatchsAujourdHui data={games} />
           </>
         )}

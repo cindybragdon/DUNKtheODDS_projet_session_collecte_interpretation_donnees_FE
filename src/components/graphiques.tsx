@@ -83,13 +83,6 @@ const Graphiques = (props: any) => {
         tension: 0.4, 
         pointBackgroundColor: 'rgba(255, 99, 132, 1)',
       },
-    ],
-  };
-
-
-  const dataTeam2 = {
-    labels: gameDatesTeam2,
-    datasets: [
       {
         label: 'Points par match',
         data: gamePointsTeam2, 
@@ -101,6 +94,8 @@ const Graphiques = (props: any) => {
       },
     ],
   };
+
+
 
   const options = {
     responsive: true,
@@ -153,11 +148,6 @@ const Graphiques = (props: any) => {
       <div style={{ flex: 1, maxWidth: '33%', textAlign: 'center' }}>
         <h2>{props.selectedTeam1}</h2>
         <Line data={dataTeam1} options={options} />
-      </div>
-
-      <div style={{ flex: 1, maxWidth: '33%', textAlign: 'center' }}>
-        <h2>{props.selectedTeam2}</h2>
-        <Line data={dataTeam2} options={options} />
       </div>
     </div>
   );
