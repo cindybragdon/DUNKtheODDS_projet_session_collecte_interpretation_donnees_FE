@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import TableauMatchAjd from "./tableauMatchAjd";
-import { fetchAllPoints } from "../lib/axios";
 
 const MatchsAujourdHui = (props:any) => {
   const [matchsAujourdhui, setMatchsAujourdhui] = useState([]);

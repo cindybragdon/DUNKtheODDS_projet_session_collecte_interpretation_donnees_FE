@@ -93,7 +93,7 @@ const teamsLogos = [
                 "#FFB81C"
             ],
             "did": 1,
-            "imgURL": "http://fr.global.nba.com/media/img/teams/logos/CLE_logo.svg",
+            "imgURL": "https://upload.wikimedia.org/wikipedia/fr/0/06/Cavs_de_Cleveland_logo_2017.png",
             "name": "Cavaliers",
             "pop": 2.1,
             "region": "Cleveland",
@@ -110,7 +110,7 @@ const teamsLogos = [
                 "#B8C4CA"
             ],
             "did": 3,
-            "imgURL": "http://fr.global.nba.com/media/img/teams/logos/DAL_logo.svg",
+            "imgURL": "https://upload.wikimedia.org/wikipedia/en/9/97/Dallas_Mavericks_logo.svg",
             "name": "Mavericks",
             "pop": 7.2,
             "region": "Dallas",
@@ -144,7 +144,7 @@ const teamsLogos = [
                 "#bec0c2"
             ],
             "did": 1,
-            "imgURL": "http://fr.global.nba.com/media/img/teams/logos/DET_logo.svg",
+            "imgURL": "https://images4.alphacoders.com/981/981952.jpg",
             "name": "Pistons",
             "pop": 4.3,
             "region": "Detroit",
@@ -297,7 +297,7 @@ const teamsLogos = [
                 "#9ea2a2"
             ],
             "did": 4,
-            "imgURL": "http://fr.global.nba.com/media/img/teams/logos/MIN_logo.svg",
+            "imgURL": "https://i.pinimg.com/736x/6d/8a/45/6d8a450c9367995f35f8c4ed2ec9b8af.jpg",
             "name": "Timberwolves",
             "pop": 3.6,
             "region": "Minnesota",
@@ -416,8 +416,8 @@ const teamsLogos = [
                 "#E03A3E"
             ],
             "did": 4,
-            "imgURL": "http://fr.global.nba.com/media/img/teams/logos/POR_logo.svg",
-            "name": "Trailblazers",
+            "imgURL": "https://findlogovector.com/wp-content/uploads/2020/06/portland-trail-blazers-logo-vector.png",
+            "name": "Trail Blazers",
             "pop": 2.4,
             "region": "Portland",
             "stadiumCapacity": 19980,
@@ -450,7 +450,7 @@ const teamsLogos = [
                 "#c4ced4"
             ],
             "did": 3,
-            "imgURL": "http://fr.global.nba.com/media/img/teams/logos/SAS_logo.svg",
+            "imgURL": "https://upload.wikimedia.org/wikipedia/fr/a/a2/San_Antonio_Spurs.svg",
             "name": "Spurs",
             "pop": 2.5,
             "region": "San Antonio",
