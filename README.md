@@ -2,7 +2,8 @@
 <div id="haut-de-page"></div>
 
 <div align="center">
-  <img src="https://github.com/user-attachments/assets/1e78fb76-f71f-4d7d-b101-0b829d6c3bd8" alt="Description de l'image">
+  <img src="![image](https://github.com/user-attachments/assets/266577b4-5c9f-4bc3-8803-9b8607bb1a94)
+" alt="Description de l'image">
   <p style="margin-top: 20px;">
     <a href="https://trello.com/b/K5sGUke5/dunktheodds-projet-session-cid" 
        target="_blank" 
