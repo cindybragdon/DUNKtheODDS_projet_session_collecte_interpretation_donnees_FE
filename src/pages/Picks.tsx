@@ -79,7 +79,11 @@ const Picks = () => {
         }}
       >
         <h1 className="text-center text-white mb-4">Picks</h1>
-
+        {error && (
+              <div className="text-danger text-center" style={{ fontSize: "18px" }}>
+                {error}
+              </div>
+            )}
         {!teams.length || !points.length || !games.length ? (
           <div className="text-center text-white">
             <p>Chargement des données...</p>
@@ -118,6 +122,7 @@ const Picks = () => {
                   ))}
                 </select>
               </div>
+                  
 
               <div style={{ width: "30%", maxWidth: "300px" }}>
                 <label className="form-label text-white">Sélectionnez le type de mise</label>
@@ -140,11 +145,6 @@ const Picks = () => {
             </div>
 
 
-            {error && (
-              <div className="text-danger text-center" style={{ fontSize: "18px" }}>
-                {error}
-              </div>
-            )}
 
 
             <MatchsAujourdHui data={games} />
