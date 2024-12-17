@@ -1,13 +1,9 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios";
-
-import TableauMatchAjd from "../components/tableauMatchAjd.tsx";
 import Graphiques from "../components/graphiques.tsx";
 import SidebarComponent from "../components/sideBar.tsx";
 import { fetchAllGames, fetchAllPoints, fetchAllTeamsInfos } from "../lib/axios.tsx";
 import MatchsAujourdHui from "../components/matchsAujourdhui.tsx";
 import GraphMoneyline, { calculateMoneyline } from "../components/graphMoneyline.tsx";
-import GraphOverUnder from "../components/overUnder.tsx";
 import OverUnder from "../components/overUnder.tsx";
 
 const Picks = () => {
