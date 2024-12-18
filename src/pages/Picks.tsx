@@ -16,12 +16,13 @@ const Picks = () => {
   const [error, setError] = useState<string>("");
 
   const [moneyLines, setMoneyLines] = useState<any[]>([]);
+
   useEffect(() => {
     const fetchData = async () => {
       try {
         const fetchedTeams = await fetchAllTeamsInfos();
         setTeams(fetchedTeams);
-        
+
         const scores = await fetchAllPoints();
         setPoints(scores);
 
@@ -33,7 +34,6 @@ const Picks = () => {
     };
     fetchData();
   }, []);
-
 
   const handleTeam1Change = (e: React.ChangeEvent<HTMLSelectElement>) => {
     const team1 = e.target.value;
@@ -59,11 +59,9 @@ const Picks = () => {
     }
   };
 
-
-
   useEffect(() => {
-    const moneyLines = calculateMoneyline(games, selectedTeam1, selectedTeam2)
-    setMoneyLines(moneyLines)
+    const moneyLines = calculateMoneyline(games, selectedTeam1, selectedTeam2);
+    setMoneyLines(moneyLines);
   }, [games, selectedTeam1, selectedTeam2]);
 
   return (
@@ -80,10 +78,10 @@ const Picks = () => {
       >
         <h1 className="text-center text-white mb-4">Picks</h1>
         {error && (
-              <div className="text-danger text-center" style={{ fontSize: "18px" }}>
-                {error}
-              </div>
-            )}
+          <div className="text-danger text-center" style={{ fontSize: "18px" }}>
+            {error}
+          </div>
+        )}
         {!teams.length || !points.length || !games.length ? (
           <div className="text-center text-white">
             <p>Chargement des données...</p>
@@ -122,30 +120,42 @@ const Picks = () => {
                   ))}
                 </select>
               </div>
-                  
-
-              <div style={{ width: "30%", maxWidth: "300px" }}>
-                <label className="form-label text-white">Sélectionnez le type de mise</label>
-                <select
-                  className="form-select"
-                  value={selectedBetType}
-                  onChange={(e) => setSelectedBetType(e.target.value)}
-                >
-                  <option value="points">Over/Under</option>
-                  <option value="spread">Spread</option>
-                  <option value="moneyline">Moneyline</option>
-                </select>
+            </div>
+            <h2>{selectedTeam1} vs {selectedTeam2}</h2>
+            <div className="graph-container">
+              <div className="graph-item">
+                <Graphiques
+                  games={games}
+                  teams={teams}
+                  selectedTeam1={selectedTeam1}
+                  selectedTeam2={selectedTeam2}
+                />
+              </div>
+              <div className="graph-item">
+                <GraphMoneyline
+                  teamA={moneyLines[0]}
+                  teamB={moneyLines[1]}
+                  selectedTeam1={selectedTeam1}
+                  selectedTeam2={selectedTeam2}
+                />
               </div>
             </div>
-            <div>
 
-              <Graphiques games={games} teams={teams} selectedTeam1={selectedTeam1} selectedTeam2={selectedTeam2}/>
-              <GraphMoneyline teamA={moneyLines[0]} teamB={moneyLines[1]} />
-              <OverUnder games={games} selectedTeam1={selectedTeam1} selectedTeam2={selectedTeam2} />
+            <div style={{ textAlign: "center", margin: "20px 0" }}>
+      
+              <div
+                style={{
+                  color: "rgba(255, 205, 86, 0.7)", // Jaune translucide (Chart.js palette)
+                  fontSize: "80px", // Taille agrandie pour les chiffres
+                }}
+              >
+                <OverUnder
+                  games={games}
+                  selectedTeam1={selectedTeam1}
+                  selectedTeam2={selectedTeam2}
+                />
+              </div>
             </div>
-
-
-
 
             <MatchsAujourdHui data={games} />
           </>

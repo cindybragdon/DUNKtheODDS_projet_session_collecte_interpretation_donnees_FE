@@ -6,6 +6,8 @@ const tokenObject = localStorage.getItem('token');
 const user = JSON.parse(userObject || "null") ;
 const token = tokenObject || "null";
 
+console.log(user);
+console.log(token);
 
 function ConnectedRoute() {
     return (

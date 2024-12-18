@@ -22,3 +22,15 @@ body {
 .container-fluid {
   min-height: 100%; 
 }
+
+.graph-container {
+  display: flex; /* Utilise Flexbox pour aligner les éléments sur une ligne */
+  gap: 20px; /* Ajoute un espace entre les graphiques */
+  justify-content: center; /* Centre les graphiques horizontalement */
+  margin: 20px 0; /* Ajoute un peu de marge autour du conteneur */
+}
+
+.graph-item {
+  flex: 1; /* Permet aux graphiques de prendre une taille égale */
+  max-width: 50%; /* Limite la largeur de chaque graphique pour éviter qu'ils ne soient trop grands */
+}
