@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import SidebarComponent from "../components/sideBar";
 import Footer from "../components/footer";
+import "../About.css"
 
 const Contact = () => {
     
@@ -16,7 +17,7 @@ const Contact = () => {
         </div>
         <div>
       <h1>Contact Us</h1>
-      <form>
+      <form className="contact-form">
         <div>
           <label htmlFor="name">Votre nom:</label> <br></br>
           <input type="text" id="name" placeholder="Votre nom" /><br></br>
