@@ -143,21 +143,6 @@ npm start : Démarre l'application en mode développement.
 npm build : Construit l'application pour la production dans le dossier build.
 npm test : Lance les tests unitaires.
 
-## **Tests**  
-
-### Tests Automatisés
-Exécuter les tests
-Backend :
-```bash
-cd backend
-npm test
-```
-
-Frontend :
-```bash
-cd ../frontend
-npm test
-```
 
 Complément
 Le backend complet est disponible ici :
