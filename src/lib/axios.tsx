@@ -51,8 +51,21 @@ export const fetchAllGames = async () => {
     }
   };
   
-  export const signin = async (userData:Object) => {
+  export const signin = async (userData:any) => {
     try {
+      if(userData.role === "Admin") {
+        const token = localStorage.getItem('token');
+
+        if (!token) {
+          throw new Error('No token found');
+        }
+        const response = await axios.post(`http://localhost:3000/users/signIn`, userData,
+          {headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+        return response.data;
+      }
       const response = await axios.post(`http://localhost:3000/users/signIn`, userData);
       return response.data;
     } catch (error) {

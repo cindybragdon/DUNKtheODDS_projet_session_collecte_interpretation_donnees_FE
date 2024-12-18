@@ -48,23 +48,31 @@ const OverUnder = (props:any) => {
 
   return(
     <div>
-      <span
-        style={{
-          color: "rgba(255, 99, 132, 0.7)", // Rose translucide (Chart.js palette)
-          fontWeight: "bold",
-          fontSize: "60px", // Taille agrandie pour le texte "Over/Under"
-        }}
-      >
-        Over/Under :     
-      </span>
-      <span
-        style={{
-          color: "rgba(255, 205, 86, 0.7)", // Jaune translucide (Chart.js palette)
-          fontSize: "80px", // Taille agrandie pour les chiffres
-        }}
-      >
-             {overUnder}
-      </span>
+        {
+            overUnder !== 0 ? 
+            <>
+                <span
+                style={{
+                color: "rgba(255, 99, 132, 0.7)", // Rose translucide (Chart.js palette)
+                fontWeight: "bold",
+                fontSize: "60px", // Taille agrandie pour le texte "Over/Under"
+                }}
+                >
+                    Over/Under :     
+                </span>
+                <span
+                    style={{
+                    color: "rgba(255, 205, 86, 0.7)", // Jaune translucide (Chart.js palette)
+                    fontSize: "80px", // Taille agrandie pour les chiffres
+                    }}
+                >
+                        {overUnder}
+                </span>
+            
+            </>
+            : <></> 
+        }
+     
     </div>
   )
 };
