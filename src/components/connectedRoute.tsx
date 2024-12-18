@@ -6,6 +6,7 @@ const tokenObject = localStorage.getItem('token');
 const user = JSON.parse(userObject || "null") ;
 const token = tokenObject || "null";
 
+console.log("connectedUSer : ")
 console.log(user);
 console.log(token);
 

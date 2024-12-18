@@ -4,6 +4,7 @@ import Footer from '../components/footer';
 import UpdateModal from '../components/UpdateModal';
 import "../MyAccount.css"
 import '../LogSign.css';
+import { deleteUser, updateUser } from '../lib/axios';
 
 const MyAccount: React.FC = () => {
   const [userEmail, setUserEmail] = useState<string>('none');
@@ -11,6 +12,7 @@ const MyAccount: React.FC = () => {
   const [userRole, setUserRole] = useState<string>('none');
   const [loading, setLoading] = useState<boolean>(true);
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
+  const [error, setError] = useState<string>('');
 
   useEffect(() => {
     const userObject = localStorage.getItem('user');
@@ -25,34 +27,42 @@ const MyAccount: React.FC = () => {
 
   const handleModifyInfo = () => setIsModalOpen(true);
 
-  const handleDeleteAccount = () => {
+  const handleDeleteAccount = async () => {
+
     if (window.confirm('Êtes-vous sûr de vouloir supprimer votre compte ?')) {
-      localStorage.removeItem('user');
-      alert('Votre compte a été supprimé.');
-      window.location.href = '/';
+      const user = JSON.parse(localStorage.getItem('user') || '{}');
+      if (user) {
+
+        localStorage.setItem('user', JSON.stringify(user));
+        const response = await deleteUser(user._id);
+
+        localStorage.setItem('user', "null");
+        localStorage.setItem('token', "null");
+        if(response) {
+          window.location.reload();
+          alert('Votre compte a été supprimé.');
+          window.location.href = '/';
+        } else {
+          setError("Erreur : n'a pas réussis à supprimer l'utilisateur");
+        }
+      }
     }
   };
 
-  const handleUpdateUserInfo = (newUsername: string, newPassword: string) => {
+  const handleUpdateUserInfo = async (newUsername: string, newPassword: string) => {
+
     const user = JSON.parse(localStorage.getItem('user') || '{}');
     if (user) {
       user.username = newUsername;
       user.password = newPassword;
       localStorage.setItem('user', JSON.stringify(user));
 
-      fetch('/api/update-user', {
-        method: 'PUT',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          userId: user.id,
-          username: newUsername,
-          password: newPassword,
-        }),
-      })
-        .then((response) => response.json())
+      const response = await updateUser(user._id, user);
+      if(response) {
         window.location.reload();
+      } else {
+        setError("Erreur : n'a pas réussis à modifier l'utilisateur")
+      }
     }
   };
 
@@ -73,6 +83,13 @@ const MyAccount: React.FC = () => {
           <br />
           <button className="btn" onClick={handleDeleteAccount}>Supprimer votre compte</button>
         </div>
+        <h1
+          style={{
+            color: "rgba(255, 0, 0, 0.7)", // Jaune translucide (Chart.js palette)
+            fontSize: "20px", // Taille agrandie pour les chiffres
+          }}>
+        {error}
+        </h1>
       </div>
 
       <SidebarComponent />
