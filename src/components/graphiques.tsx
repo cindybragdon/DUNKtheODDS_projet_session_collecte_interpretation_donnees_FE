@@ -75,7 +75,7 @@ const Graphiques = (props: any) => {
     labels: gameDatesTeam1,
     datasets: [
       {
-        label: 'Points par match',
+        label: `${props.selectedTeam1}`,
         data: gamePointsTeam1, 
         borderColor: 'rgba(75, 192, 192, 1)',
         backgroundColor: 'rgba(75, 192, 192, 0.2)',
@@ -84,7 +84,7 @@ const Graphiques = (props: any) => {
         pointBackgroundColor: 'rgba(255, 99, 132, 1)',
       },
       {
-        label: 'Points par match',
+        label: `${props.selectedTeam2}`,
         data: gamePointsTeam2, 
         borderColor: 'rgba(0, 255, 100, 1)',
         backgroundColor: 'rgba(75, 192, 192, 0.2)',
@@ -107,6 +107,14 @@ const Graphiques = (props: any) => {
           textAlign: 'center',
           color: 'white'
         },
+        title: {
+          display: true,
+          text: 'Points par match',
+          color: 'white', // Set title text color to white
+          font: {
+              size: 18, // Optional: Adjust title font size
+          },
+      },
       },
       tooltip: {
         callbacks: {
@@ -144,13 +152,24 @@ const Graphiques = (props: any) => {
   };
 
   return (
-    <div style={{ display: 'flex', alignItems: 'flex-start' }}>
-      <div style={{ flex: 1, maxWidth: '33%', textAlign: 'center' }}>
-        <h2>{props.selectedTeam1}</h2>
-        <Line data={dataTeam1} options={options} />
+    
+      <div
+        style={{
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+          border: '1px solid white', // Fine white border
+          borderRadius: '8px', // Optional: Rounded corners
+          padding: '16px', // Optional: Padding inside the border
+          backgroundColor: 'rgba(0, 0, 0, 0.5)', // Optional: Background color for contrast
+        }}
+      >
+        <div style={{ flex: 1, textAlign: 'center' }}>
+          <Line data={dataTeam1} options={options} />
+        </div>
       </div>
-    </div>
-  );
+    );
+  
 };
 
 export default Graphiques;
