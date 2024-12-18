@@ -163,5 +163,22 @@ Complément
 Le backend complet est disponible ici :
 👉 Backend - DUNKtheODDS
 
+### Utilisateurs enregistres <br>
+admin <br>
+admin@dunktheodds.com<br>
+admin1<br>
+admin1@dunktheodds.com<br>
+admin2<br>
+admin2@dunktheodds.com<br>
+mot de passe : abc-123
+
+user<br>
+user@dunktheodds.com<br>
+user1<br>
+user1@dunktheodds.com<br>
+user2<br>
+user2@dunktheodds.com<br>
+mot de passe : abc-123
+
 [🔝 Retour en haut](#haut-de-page)
 
