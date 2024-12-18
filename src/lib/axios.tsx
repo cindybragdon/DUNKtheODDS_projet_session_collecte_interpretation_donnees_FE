@@ -43,8 +43,10 @@ export const fetchAllGames = async () => {
         throw Error;
       }
 
+      
       localStorage.setItem('user', JSON.stringify(response.data.user));
       localStorage.setItem('token', response.data.token);
+      console.log(response.data)
       return response.data;
     } catch (error) {
       console.error('Erreur lors du login :', error);
@@ -87,6 +89,10 @@ export const fetchAllGames = async () => {
         },
       });
       console.log(response.data);
+      if (response.status === 200) {
+        return response.data;
+      }
+
     } catch (error) {
       console.error('Erreur lors de la modification dun utilisateur :', error);
     }
@@ -108,7 +114,10 @@ export const fetchAllGames = async () => {
         },
       });
       console.log(response.data); // supression d'un user
-      return response.data;
+      console.log(response.data);
+      if (response.status === 204) {
+        return response.status;
+      }
     } catch (error) {
       console.error('Erreur lors de la supression dun user :', error);
     }

@@ -5,14 +5,13 @@ import "../About.css"
 
 const About = () => {
     return(
-        
+
         <div className='textStyle d-flex flex-column   justify-content-center align-items-center p-4 '>
             <h6 className='about-title '> ChatGPT generated </h6> 
             <div className='d-flex w-25 justify-content-center align-items-center font-family: "Space Grotesk", serif; '>
                 <img className='w-25 img-fluid' src={'./images/icone.png'} alt="k"/><h1 className='text-white'>UNKtheODDS</h1>
             </div>
 
-        
             <div className="about-container "> 
             <h6 className="about-text">À propos de DunkTheOdds</h6>
             Bienvenue sur DunkTheOdds, votre plateforme de référence dédiée aux passionnés de basketball et aux parieurs éclairés. Nous sommes là pour vous fournir les informations les plus pertinentes et détaillées pour vous aider à prendre des décisions éclairées lors de vos paris sur les matchs de basketball.
