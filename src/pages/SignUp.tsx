@@ -130,7 +130,7 @@ const SignUpPage = () => {
             <a href="/login" className="">Connectez-vous</a>
           </p>
         </div>
-      </div>
+      </div>  
       <Footer/>
     </div>
   );
