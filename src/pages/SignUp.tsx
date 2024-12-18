@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import '../LogSign.css';
+import '../SignUp.css';
 import SidebarComponent from '../components/sideBar';
 import { useNavigate } from 'react-router-dom';
 import { signin } from '../lib/axios';
@@ -65,12 +65,12 @@ const SignUpPage = () => {
     <div className="overlay body">
       <SidebarComponent />
       <div className="">
-        <div className="">
+        <div className="sign-title">
           <img
             style={{ width: '100px' , paddingBottom: '30px'}}
             src={'./images/icone.png'}
           />
-          <h2 className="" style={{ marginLeft : '60px', color: 'white'}}>Créez votre compte</h2>
+          <h2 className="h2-sign" style={{ marginLeft : '60px', color: 'white'}}>Créez votre compte</h2>
         </div>
         <div className="wrapper">
           <form className="" onSubmit={handleSubmit}>
