@@ -131,14 +131,24 @@ const Picks = () => {
                   selectedTeam2={selectedTeam2}
                 />
               </div>
-              <div className="graph-item">
-                <GraphMoneyline
-                  teamA={moneyLines[0]}
-                  teamB={moneyLines[1]}
-                  selectedTeam1={selectedTeam1}
-                  selectedTeam2={selectedTeam2}
-                />
-              </div>
+              
+              {moneyLines[0] !== 0 && moneyLines[1] !== 0 ? 
+            
+                <div className="graph-item">
+                  <GraphMoneyline
+                    teamA={moneyLines[0]}
+                    teamB={moneyLines[1]}
+                    selectedTeam1={selectedTeam1}
+                    selectedTeam2={selectedTeam2}
+                  />
+                </div>
+                :
+                <h1 className="graph-item">
+                  Impossible de charger le moneyline et le over/under. Les 2 équipes n'ont jamais joué l'une contre l'autre.
+                </h1>
+            
+              }
+
             </div>
 
             <div style={{ textAlign: "center", margin: "20px 0" }}>
