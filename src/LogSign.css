@@ -17,13 +17,13 @@ font-size: 36px;
 text-align: center;
 
 }
-.body {
 
+.body{
   display: flex;
   justify-content: center;
   align-items: center;
-  min-height: 110vh;
-  flex-direction: column;
+  min-height: 100vh;
+
 }
 
 .dunk{
@@ -41,7 +41,8 @@ box-shadow: 0 0 10px rgba(0, 0, 0, .2);
 color: #ffff;
 padding: 30px 40px;
 border-radius: 10px;
-margin-bottom: 200px;
+
+margin-bottom: 300px;
 
 align-items: center;
 }
