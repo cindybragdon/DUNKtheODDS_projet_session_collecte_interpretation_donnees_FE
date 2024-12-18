@@ -47,12 +47,13 @@ const LoginPage = () => {
   };
 
   return (
-    <div className="overlay body">
+    <div className="body">
       <SidebarComponent />
       <div >
         <div >
           <img
-             style={{ width: '100px', paddingBottom: '30px'}}
+            
+             style={{ width: '100px', paddingBottom: '30px', marginTop: '30px'}}
             src={'./images/icone.png'}
             alt="Your Company"
           />
@@ -64,7 +65,7 @@ const LoginPage = () => {
         <div className="wrapper">
           <form  onSubmit={handleSubmit}>
             {error && (
-              <div className="text-red-500 text-sm text-center mb-4">{error}</div>
+              <div className="text-red-500 text-sm text-center">{error}</div>
             )}
             <div>
               <div className="input-box">
@@ -97,7 +98,7 @@ const LoginPage = () => {
               </div>
             </div>
 
-            <div>
+            <div className='align'>
               <button
                 type="submit"
                 className="btn"
