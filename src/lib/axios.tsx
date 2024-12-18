@@ -1,8 +1,10 @@
 import axios from 'axios';
 
+const apiUrl = process.env.REACT_APP_BACKEND_URL;
+
 export const fetchAllTeamsInfos = async () => {
   try {
-    const response = await axios.get(`https://localhost:3000/teamInfos`);
+    const response = await axios.get(`${apiUrl}/teamInfos`);
     console.log(response.data); // Affiche la liste des scores d'équipe
     return response.data
   } catch (error) {
@@ -12,7 +14,7 @@ export const fetchAllTeamsInfos = async () => {
 
 export const fetchAllPoints = async () => {
   try {
-    const response = await axios.get(`https://localhost:3000/points`);
+    const response = await axios.get(`${apiUrl}/points`);
     console.log("Réponse brute de l'API :", response);
     console.log("Données retournées par l'API :", response.data);
     return response.data;
@@ -25,7 +27,7 @@ export const fetchAllPoints = async () => {
 
 export const fetchAllGames = async () => {
   try {
-    const response = await axios.get(`https://localhost:3000/games`);
+    const response = await axios.get(`${apiUrl}/games`);
     console.log("Réponse brute de l'API :", response);
     console.log("Données retournées par l'API :", response.data);
     return response.data;
@@ -37,7 +39,7 @@ export const fetchAllGames = async () => {
 
   export const login = async (email:string, password:string) => {
     try {
-      const response = await axios.post(`https://localhost:3000/users/login`, {email, password});
+      const response = await axios.post(`${apiUrl}/users/login`, {email, password});
       console.log(response.data);
       if(response.status !== 200) {
         throw Error;
@@ -61,14 +63,14 @@ export const fetchAllGames = async () => {
         if (!token) {
           throw new Error('No token found');
         }
-        const response = await axios.post(`https://localhost:3000/users/signIn`, userData,
+        const response = await axios.post(`${apiUrl}/users/signIn`, userData,
           {headers: {
             Authorization: `Bearer ${token}`,
           },
         });
         return response.data;
       }
-      const response = await axios.post(`https://localhost:3000/users/signIn`, userData);
+      const response = await axios.post(`${apiUrl}/users/signIn`, userData);
       return response.data;
     } catch (error) {
       console.error('Erreur lors du signin :', error); 
@@ -83,7 +85,7 @@ export const fetchAllGames = async () => {
       if (!token) {
         throw new Error('No token found');
       }
-      const response = await axios.put(`https://localhost:3000/users/${id}`, updateData,
+      const response = await axios.put(`${apiUrl}/users/${id}`, updateData,
         {headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -108,7 +110,7 @@ export const fetchAllGames = async () => {
         throw new Error('No token found');
       }
 
-      const response = await axios.delete(`https://localhost:3000/users/${id}`,
+      const response = await axios.delete(`${apiUrl}/users/${id}`,
         {headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -132,7 +134,7 @@ export const fetchAllGames = async () => {
         throw new Error('No token found');
       }
 
-      const response = await axios.get(`https://localhost:3000/users/`,
+      const response = await axios.get(`${apiUrl}/users/`,
         {headers: {
           Authorization: `Bearer ${token}`,
         },
