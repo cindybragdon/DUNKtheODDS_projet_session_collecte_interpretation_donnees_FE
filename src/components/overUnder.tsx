@@ -48,7 +48,23 @@ const OverUnder = (props:any) => {
 
   return(
     <div>
-        <h1>Over/Under {overUnder}</h1>
+      <span
+        style={{
+          color: "rgba(255, 99, 132, 0.7)", // Rose translucide (Chart.js palette)
+          fontWeight: "bold",
+          fontSize: "60px", // Taille agrandie pour le texte "Over/Under"
+        }}
+      >
+        Over/Under :     
+      </span>
+      <span
+        style={{
+          color: "rgba(255, 205, 86, 0.7)", // Jaune translucide (Chart.js palette)
+          fontSize: "80px", // Taille agrandie pour les chiffres
+        }}
+      >
+             {overUnder}
+      </span>
     </div>
   )
 };
