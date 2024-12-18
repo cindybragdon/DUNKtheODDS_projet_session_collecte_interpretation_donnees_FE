@@ -2,17 +2,15 @@
 .account-box {
     align-items: center;
     text-align: center;
- 
     background :transparent;
-
     color: #ffff;
     padding: 30px 40px;
     border-radius: 10px;
     margin-bottom: 260px; 
 
 
-}
 
+}
 
 .account-title {
     margin: 30px;
