@@ -75,7 +75,12 @@ Développement d’un service de collecte, traitement et Stockage de données av
     <td><img src="https://img.shields.io/badge/FontAwesome-528DD7?style=for-the-badge&logo=fontawesome&logoColor=white"></td>
     <td><img src="https://img.shields.io/badge/Toastify-FF6C37?style=for-the-badge&logo=react&logoColor=white"></td>
   </tr>
+  <tr>
+    <td><img src="https://img.shields.io/badge/Python%203-3776AB?style=for-the-badge&logo=python&logoColor=white"></td>
+    <td><img src="https://img.shields.io/badge/Cron-0078D7?style=for-the-badge&logo=windows-terminal&logoColor=white"></td>
+  </tr>
 </table>
+
 
 ---
 Installation et mise en route
